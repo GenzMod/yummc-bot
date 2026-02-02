@@ -148,6 +148,7 @@ async function checkServer() {
         .setImage(process.env.SERVER_BANNER)
         .addFields(
           { name: "🌍 Server", value: process.env.MC_IP },
+          { name: "🌍 Port", value: process.env.MC_PORT },
           {
             name: "👥 Online",
             value: `${res.players.online}/${res.players.max}`,
@@ -402,6 +403,7 @@ Bot : Không
           .setImage(process.env.SERVER_BANNER)
           .addFields(
             { name: "🌍 Server", value: process.env.MC_IP },
+            { name: "🌍 Port", value: process.env.MC_PORT },
             {
               name: "👥 Online",
               value: `${res.players.online}/${res.players.max}`,
@@ -576,6 +578,7 @@ client.on("interactionCreate", async interaction => {
           .setImage(process.env.SERVER_BANNER)
           .addFields(
             { name: "🌍 Server", value: process.env.MC_IP },
+            { name: "🌍 Port", value: process.env.MC_PORT },
             {
               name: "👥 Online",
               value: `${res.players.online}/${res.players.max}`,
@@ -775,4 +778,5 @@ process.on('unhandledRejection', error => {
 client.login(process.env.TOKEN).catch(error => {
   console.error('❌ Không thể đăng nhập bot:', error);
   process.exit(1);
+
 });

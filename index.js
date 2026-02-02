@@ -163,9 +163,9 @@ async function checkServer() {
         .setTimestamp();
 
       channel.send({
-        content: "@everyone",
+        content: <@&${process.env.ADMIN_ROLE_ID}>,
         embeds: [embed],
-        allowedMentions: { parse: ["everyone"] }
+        allowedMentions: { roles: [process.env.ADMIN_ROLE_ID] }
       });
     }
   } catch {
@@ -780,3 +780,4 @@ client.login(process.env.TOKEN).catch(error => {
   process.exit(1);
 
 });
+

@@ -714,7 +714,8 @@ Bot : Không
         iconURL: 'https://cdn.discordapp.com/emojis/1107957766495973386.webp'
       })
       .setTimestamp();
-      }
+    return message.reply({ embeds: [codeEmbed] });
+    }
       
     /* ===== !gui (Prefix) - KIỂM TRA ROLE ===== */
     if (cmd === "gui") {

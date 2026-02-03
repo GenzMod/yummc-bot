@@ -449,7 +449,7 @@ Bot : Không
           { name: '`/thanhtoan`', value: 'Thông tin thanh toán + mã QR', inline: true }
         )
         .setFooter({ 
-          text: `YumMC Bot - ${hasGuiPerm ? 'Bạn có quyền dùng !gui' : 'Không có quyền !gui'}`,
+          text: `YumMC Bot - ${hasGuiPerm ? 'Bạn có quyền dùng gui' : 'Không có quyền gui'}`,
           iconURL: client.user.displayAvatarURL() 
         });
       
@@ -457,11 +457,11 @@ Bot : Không
       if (hasGuiPerm) {
         const guiDescription = REQUIRE_ADMIN_FOR_GUI 
           ? 'Gửi thông báo quan trọng (Admin only)' 
-          : 'Gửi tin nhắn vào kênh (Role restricted)';
+          : 'Gửi tin nhắn vào kênh (Role restricted),Chỉ Admin mới có quyền dùng lệnh này';
         
         helpEmbed.addFields(
           { name: '💬 **GỬI TIN NHẮN**', value: '────────────' },
-          { name: '`/gui` hoặc `!gui`', value: guiDescription, inline: true }
+          { name: '`/gui` hoặc `gui`', value: guiDescription, inline: true }
         );
       }
       
@@ -606,7 +606,7 @@ Bot : Không
         .setImage('https://i.imgur.com/minecraft-banner.png') // Thêm banner nếu có
         .setFooter({ 
           text: '🎮 EternalSMP - Kết nối cộng đồng Minecraft Việt Nam',
-          iconURL: 'https://cdn.discordapp.com/emojis/1070794033793863740.webp?size=96&quality=lossless'
+          iconURL: 'https://cdn.discordapp.com/attachments/1453047727117172927/1468059669896626207/87C09904-456F-47EA-A678-2517457545F8.png?ex=6982a49c&is=6981531c&hm=cb81830c1986dc5a6ab186607e3069c37d85db720692d94b110306ad22d8e1e4&'
         })
         .setTimestamp();
       

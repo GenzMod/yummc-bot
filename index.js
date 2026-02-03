@@ -436,8 +436,7 @@ Bot : Không
           { name: '🎮 **LỆNH MINECRAFT**', value: '────────────' },
           { name: '`/online` hoặc `online`', value: 'Xem trạng thái server Minecraft', inline: true },
           { name: '🎁 **LỆNH CODE QUÀ TẶNG**', value: '────────────' },
-          { name: '`code`', value: 'Xem danh sách code quà tặng', inline: true }
-);
+          { name: '`code`', value: 'Xem danh sách code quà tặng', inline: true },
           { name: '📊 **LỆNH THÔNG TIN**', value: '────────────' },
           { name: '`/info` hoặc `info`', value: 'Thông tin về bot', inline: true },
           { name: '`/ping` hoặc `ping`', value: 'Kiểm tra độ trễ của bot', inline: true },

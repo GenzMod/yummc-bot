@@ -501,6 +501,117 @@ Bot : Không
       
       return message.channel.send({ embeds: [infoEmbed] });
     }
+    
+         /* ===== !ip (Phiên bản nâng cao) ===== */
+    if (cmd === "ip") {
+      // Tạo button để copy IP
+      const row = new ActionRowBuilder()
+        .addComponents(
+          new ButtonBuilder()
+            .setCustomId('copy_java_ip')
+            .setLabel('📋 Copy Java IP')
+            .setStyle(ButtonStyle.Secondary)
+            .setEmoji('💻'),
+          new ButtonBuilder()
+            .setCustomId('copy_bedrock_ip')
+            .setLabel('📱 Copy Bedrock IP')
+            .setStyle(ButtonStyle.Secondary)
+            .setEmoji('📱')
+        );
+      
+      const ipEmbed = new EmbedBuilder()
+        .setColor('#00FF99')
+        .setTitle('🍀 **EternalSMP Community** 🍀')
+        .setDescription('🌐 Thông tin kết nối máy chủ')
+        .addFields(
+          {
+            name: '🎮 **CHẾ ĐỘ MÁY CHỦ**',
+            value: '━━━━━━━━━━━━━━━━━━━━',
+            inline: false
+          },
+          {
+            name: '🟢 ⚔️ Eco Sword',
+            value: '```✅ Tạm đóng```',
+            inline: true
+          },
+          {
+            name: '🔴 ⚔️ Box PvP',
+            value: '```❎ Chưa mở```',
+            inline: true
+          },
+          {
+            name: '🔴 ☁️ SkyBlock',
+            value: '```❎ Chưa mở```',
+            inline: true
+          },
+          {
+            name: '💻 **JAVA EDITION**',
+            value: '━━━━━━━━━━━━━━━━━━━━',
+            inline: false
+          },
+          {
+            name: '🌎 IP',
+            value: '```yummc.online```',
+            inline: true
+          },
+          {
+            name: '〽️ Phiên Bản',
+            value: '```1.18.x - 1.21.x```',
+            inline: true
+          },
+          {
+            name: '📱 **BEDROCK / PE**',
+            value: '━━━━━━━━━━━━━━━━━━━━',
+            inline: false
+          },
+          {
+            name: '🌎 IP',
+            value: '```yummc.online```',
+            inline: true
+          },
+          {
+            name: '〽️ Phiên Bản',
+            value: '```1.21.111 +```',
+            inline: true
+          },
+          {
+            name: '🔌 Port',
+            value: '```25570```',
+            inline: true
+          },
+          {
+            name: '🧑‍🔧 **TRẠNG THÁI MÁY CHỦ**',
+            value: '━━━━━━━━━━━━━━━━━━━━',
+            inline: false
+          },
+          {
+            name: '📢 Thông báo',
+            value: '```Đang bảo trì, Sẽ mở lại sv vào cuối tuần này. Cụ thể là Chủ Nhật```',
+            inline: false
+          },
+          {
+            name: '💬 Cập nhật',
+            value: '```Mọi thông tin sẽ được cập nhật tại kênh thông báo sau 🥰```',
+            inline: false
+          },
+          {
+            name: '❤️ Lời nhắn',
+            value: '```Chúc các bạn một ngày tốt lành\n🥰 Luôn luôn ủng hộ sv mình nha 😍```',
+            inline: false
+          }
+        )
+        .setImage('https://i.imgur.com/minecraft-banner.png') // Thêm banner nếu có
+        .setFooter({ 
+          text: '🎮 EternalSMP - Kết nối cộng đồng Minecraft Việt Nam',
+          iconURL: 'https://cdn.discordapp.com/emojis/1070794033793863740.webp?size=96&quality=lossless'
+        })
+        .setTimestamp();
+      
+      return message.reply({ 
+        embeds: [ipEmbed],
+        components: [row]
+      });
+    }
 
     /* ===== !gui (Prefix) - KIỂM TRA ROLE ===== */
     if (cmd === "gui") {
@@ -758,6 +869,23 @@ client.on("interactionCreate", async interaction => {
   
   if (interaction.isButton() && interaction.customId === 'openSendModal') {
     await handleOpenModal(interaction);
+  }
+  
+    // Xử lý button copy IP
+  if (interaction.isButton()) {
+    if (interaction.customId === 'copy_java_ip') {
+      await interaction.reply({
+        content: '📋 **Java IP đã được copy:**\n```yummc.online```\nPhiên bản: 1.18.x - 1.21.x',
+        ephemeral: true
+      });
+    }
+    
+    if (interaction.customId === 'copy_bedrock_ip') {
+      await interaction.reply({
+        content: '📱 **Bedrock IP đã được copy:**\n```yummc.online```\nPort: `25570`\nPhiên bản: 1.21.111+',
+        ephemeral: true
+      });
+    }
   }
   
   if (interaction.isModalSubmit()) {

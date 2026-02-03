@@ -161,12 +161,6 @@ async function checkServer() {
           }
         )
         .setTimestamp();
-
-      channel.send({
-        content: `<@&${process.env.ADMIN_ROLE_ID}>`,
-        embeds: [embed],
-        allowedMentions: { roles: [process.env.ADMIN_ROLE_ID] }
-      });
     }
   } catch {
     client.user.setActivity("Server OFFLINE", {
@@ -182,12 +176,6 @@ async function checkServer() {
         .setDescription("Không thể kết nối tới server Minecraft")
         .setImage(process.env.SERVER_BANNER)
         .setTimestamp();
-
-      channel.send({
-        content: `<@&${process.env.ADMIN_ROLE_ID}>`,
-        embeds: [embed],
-        allowedMentions: { roles: [process.env.ADMIN_ROLE_ID] }
-      });
     }
   }
 }

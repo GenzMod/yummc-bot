@@ -699,6 +699,11 @@ Bot : Không
           inline: true
         },
         {
+          name: '✍🏻 **CÁCH DÙNG**',
+          value: '```/code + tên code```',
+          inline: true
+        },
+        {
           name: '🎯 **TỶ LỆ SỬ DỤNG**',
           value: '```92% đã dùng```',
           inline: true
@@ -715,7 +720,7 @@ Bot : Không
         .addComponents(
           new ButtonBuilder()
             .setCustomId('view_welcome')
-            .setLabel('Xem WELCOME')
+            .setLabel('Xem welcome')
             .setStyle(ButtonStyle.Success)
             .setEmoji('🎊'),
           new ButtonBuilder()
@@ -725,12 +730,12 @@ Bot : Không
             .setEmoji('⚡'),
           new ButtonBuilder()
             .setCustomId('view_denbun')
-            .setLabel('Xem DENBUN')
+            .setLabel('Xem COMBACK')
             .setStyle(ButtonStyle.Danger)
             .setEmoji('🍩'),
           new ButtonBuilder()
             .setCustomId('view_tanxuan9k')
-            .setLabel('Xem TANXUAN9K')
+            .setLabel('Xem DONXUAN')
             .setStyle(ButtonStyle.Secondary)
             .setEmoji('🌸'),
           new ButtonBuilder()
@@ -1069,7 +1074,7 @@ client.on("interactionCreate", async interaction => {
           .setCustomId('code_list')
           .setLabel('Danh sách code (copy để sử dụng)')
           .setStyle(TextInputStyle.Paragraph)
-          .setValue('WELCOME\nSS2\nDENBUN\nTANXUAN9K\n\nSử dụng: /redeem <code>')
+          .setValue('welcome\nSS2\nCOMBACK\nDONXUAN\n\nSử dụng: /code <code>')
           .setRequired(true);
         
         modal.addComponents(new ActionRowBuilder().addComponents(codeList));
@@ -1077,7 +1082,7 @@ client.on("interactionCreate", async interaction => {
       } else {
         // Hiển thị chi tiết từng code
         const codeDetails = {
-          'WELCOME': {
+          'welcome': {
             color: '#2ECC71',
             rewards: '• 5,000 Coins\n• Rương Vật Phẩm\n• VIP 3 ngày\n• Pet Mèo',
             expires: 'Không giới hạn',

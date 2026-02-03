@@ -435,7 +435,9 @@ Bot : Không
         .addFields(
           { name: '🎮 **LỆNH MINECRAFT**', value: '────────────' },
           { name: '`/online` hoặc `online`', value: 'Xem trạng thái server Minecraft', inline: true },
-          
+          { name: '🎁 **LỆNH CODE QUÀ TẶNG**', value: '────────────' },
+          { name: '`code`', value: 'Xem danh sách code quà tặng', inline: true }
+);
           { name: '📊 **LỆNH THÔNG TIN**', value: '────────────' },
           { name: '`/info` hoặc `info`', value: 'Thông tin về bot', inline: true },
           { name: '`/ping` hoặc `ping`', value: 'Kiểm tra độ trễ của bot', inline: true },
@@ -612,6 +614,135 @@ Bot : Không
       
       return message.reply({ 
         embeds: [ipEmbed],
+        components: [row]
+      });
+    }
+    
+        /* ===== !code (Phiên bản nâng cao) ===== */
+    if (cmd === "code") {
+      // Tạo embed với card design
+      const codeEmbed = new EmbedBuilder()
+        .setColor('#9B59B6') // Màu tím đẹp mắt
+        .setTitle('<a:gift:1107957766495973386> **KHO BÁU CODE - RINH QUÀ MIỄN PHÍ** <a:gift:1107957766495973386>')
+        .setDescription('<a:sparkles:1107957800008732723> **Tuyển tập code hot nhất server** <a:sparkles:1107957800008732723>')
+        .setThumbnail('https://cdn.discordapp.com/attachments/1107957800008732723/1200000000000000000/gift_box.png')
+        .setImage('https://i.imgur.com/rainbow_banner.png')
+        .addFields(
+          {
+            name: '<:diamond:1107957766495973387> ━━━━━━━━━━━━━━━━━━━━ <:diamond:1107957766495973387>',
+            value: ' ',
+            inline: false
+          }
+        );
+      
+      // Tạo các field với card design cho từng code
+      const codes = [
+        {
+          name: 'WELCOME',
+          emoji: '🎊',
+          color: '#2ECC71',
+          rewards: ['5,000 Coins', 'Rương Vật Phẩm', 'VIP 3 ngày', 'Pet Mèo Dễ Thương'],
+          description: 'Code chào mừng tân thủ',
+          status: '🟢 ACTIVE'
+        },
+        {
+          name: 'SS2',
+          emoji: '⚡', 
+          color: '#3498DB',
+          rewards: ['10,000 Coins', 'Skin Độc Quyền', 'Pet SS2 Limited', 'Wings Bay'],
+          description: 'Code sự kiện Season 2',
+          status: '🟡 LIMITED'
+        },
+        {
+          name: 'DENBUN',
+          emoji: '🍩',
+          color: '#E74C3C',
+          rewards: ['7,500 Coins', 'Donut Buff', 'Voucher 20%', 'Food Bundle'],
+          description: 'Code hợp tác DenBun',
+          status: '🟢 ACTIVE'
+        },
+        {
+          name: 'TANXUAN9K',
+          emoji: '🌸',
+          color: '#9B59B6',
+          rewards: ['9,000 Coins', 'Áo Dài Tết', 'Pháo Hoa', 'Lì Xì May Mắn'],
+          description: 'Code mừng xuân 9K',
+          status: '🔴 EXPIRED SOON'
+        }
+      ];
+      
+      // Thêm từng code như một card
+      codes.forEach((code, index) => {
+        codeEmbed.addFields(
+          {
+            name: `${code.emoji} **${code.name}** • ${code.status}`,
+            value: `\`\`\`ansi\n[2;36m${code.description}[0m\n[2;32m➤ ${code.rewards.join('\n➤ ')}[0m\n\`\`\``,
+            inline: false
+          }
+        );
+      });
+      
+      // Thêm footer và thông tin
+      codeEmbed.addFields(
+        {
+          name: '<:star:1107957766495973388> ━━━━━━━━━━━━━━━━━━━━ <:star:1107957766495973388>',
+          value: ' ',
+          inline: false
+        },
+        {
+          name: '📊 **THỐNG KÊ**',
+          value: '```diff\n+ 4 code đang hoạt động\n! 1 code sắp hết hạn\n- 0 code đã hết hạn\n```',
+          inline: true
+        },
+        {
+          name: '⏰ **CẬP NHẬT**',
+          value: '```Hôm nay, 15:30```',
+          inline: true
+        },
+        {
+          name: '🎯 **TỶ LỆ SỬ DỤNG**',
+          value: '```92% đã dùng```',
+          inline: true
+        }
+      )
+      .setFooter({ 
+        text: '💝 Code mới mỗi tuần • Theo dõi #thong-bao-code để không bỏ lỡ!',
+        iconURL: 'https://cdn.discordapp.com/emojis/1107957766495973386.webp'
+      })
+      .setTimestamp();
+      
+      // Tạo các nút bấm với màu sắc riêng
+      const row = new ActionRowBuilder()
+        .addComponents(
+          new ButtonBuilder()
+            .setCustomId('view_welcome')
+            .setLabel('Xem WELCOME')
+            .setStyle(ButtonStyle.Success)
+            .setEmoji('🎊'),
+          new ButtonBuilder()
+            .setCustomId('view_ss2')
+            .setLabel('Xem SS2')
+            .setStyle(ButtonStyle.Primary)
+            .setEmoji('⚡'),
+          new ButtonBuilder()
+            .setCustomId('view_denbun')
+            .setLabel('Xem DENBUN')
+            .setStyle(ButtonStyle.Danger)
+            .setEmoji('🍩'),
+          new ButtonBuilder()
+            .setCustomId('view_tanxuan9k')
+            .setLabel('Xem TANXUAN9K')
+            .setStyle(ButtonStyle.Secondary)
+            .setEmoji('🌸'),
+          new ButtonBuilder()
+            .setCustomId('view_all_codes')
+            .setLabel('Xem tất cả')
+            .setStyle(ButtonStyle.Secondary)
+            .setEmoji('📋')
+        );
+      
+      return message.reply({ 
+        embeds: [codeEmbed],
         components: [row]
       });
     }
@@ -883,6 +1014,130 @@ client.on("interactionCreate", async interaction => {
       });
     }
     
+      // Xử lý button cho lệnh !code
+  if (interaction.isButton()) {
+    
+    // Xử lý copy code
+    if (interaction.customId === 'copy_welcome') {
+      await interaction.reply({
+        content: '🎊 **Code WELCOME đã được copy!**\n```WELCOME```\n*Nhập trong game bằng lệnh:* `/redeem WELCOME`',
+        ephemeral: true
+      });
+    }
+    
+    if (interaction.customId === 'copy_ss2') {
+      await interaction.reply({
+        content: '⚡ **Code SS2 đã được copy!**\n```SS2```\n*Nhập trong game bằng lệnh:* `/redeem SS2`',
+        ephemeral: true
+      });
+    }
+    
+    if (interaction.customId === 'copy_denbun') {
+      await interaction.reply({
+        content: '🍩 **Code DENBUN đã được copy!**\n```DENBUN```\n*Nhập trong game bằng lệnh:* `/redeem DENBUN`',
+        ephemeral: true
+      });
+    }
+    
+    if (interaction.customId === 'copy_tanxuan9k') {
+      await interaction.reply({
+        content: '🌸 **Code TANXUAN9K đã được copy!**\n```TANXUAN9K```\n*Nhập trong game bằng lệnh:* `/redeem TANXUAN9K`',
+        ephemeral: true
+      });
+    }
+    
+    // Xử lý refresh
+    if (interaction.customId === 'refresh_codes') {
+      await interaction.deferUpdate();
+      // Có thể thêm logic refresh code ở đây
+      await interaction.followUp({
+        content: '🔄 Đã làm mới danh sách code!',
+        ephemeral: true
+      });
+    }
+    
+    // Xử lý xem chi tiết code (cho phiên bản nâng cao)
+    if (interaction.customId.startsWith('view_')) {
+      const codeName = interaction.customId.replace('view_', '').toUpperCase();
+      
+      if (codeName === 'ALL_CODES') {
+        // Hiển thị modal với tất cả code
+        const modal = new ModalBuilder()
+          .setCustomId('all_codes_modal')
+          .setTitle('📋 Tất Cả Code Hiện Có');
+        
+        const codeList = new TextInputBuilder()
+          .setCustomId('code_list')
+          .setLabel('Danh sách code (copy để sử dụng)')
+          .setStyle(TextInputStyle.Paragraph)
+          .setValue('WELCOME\nSS2\nDENBUN\nTANXUAN9K\n\nSử dụng: /redeem <code>')
+          .setRequired(true);
+        
+        modal.addComponents(new ActionRowBuilder().addComponents(codeList));
+        await interaction.showModal(modal);
+      } else {
+        // Hiển thị chi tiết từng code
+        const codeDetails = {
+          'WELCOME': {
+            color: '#2ECC71',
+            rewards: '• 5,000 Coins\n• Rương Vật Phẩm\n• VIP 3 ngày\n• Pet Mèo',
+            expires: 'Không giới hạn',
+            usage: '1 lần/người'
+          },
+          'SS2': {
+            color: '#3498DB',
+            rewards: '• 10,000 Coins\n• Skin Độc Quyền\n• Pet SS2 Limited\n• Wings Bay',
+            expires: '31/12/2024',
+            usage: '1 lần/người'
+          },
+          'DENBUN': {
+            color: '#E74C3C',
+            rewards: '• 7,500 Coins\n• Donut Buff\n• Voucher 20%\n• Food Bundle',
+            expires: 'Không giới hạn',
+            usage: '1 lần/người'
+          },
+          'TANXUAN9K': {
+            color: '#9B59B6',
+            rewards: '• 9,000 Coins\n• Áo Dài Tết\n• Pháo Hoa\n• Lì Xì May Mắn',
+            expires: '15/02/2024',
+            usage: '1 lần/người'
+          }
+        };
+        
+        const detail = codeDetails[codeName];
+        if (detail) {
+          const detailEmbed = new EmbedBuilder()
+            .setColor(detail.color)
+            .setTitle(`🎁 **CODE ${codeName}**`)
+            .setDescription(`\`\`\`${codeName}\`\`\``)
+            .addFields(
+              { name: '🎯 **PHẦN THƯỞNG**', value: detail.rewards, inline: false },
+              { name: '⏰ **HẠN SỬ DỤNG**', value: detail.expires, inline: true },
+              { name: '🔢 **SỐ LẦN DÙNG**', value: detail.usage, inline: true },
+              { name: '🎮 **CÁCH DÙNG**', value: '```/redeem ' + codeName + '```', inline: false }
+            )
+            .setFooter({ text: 'Nhấn Copy để sao chép code' })
+            .setTimestamp();
+          
+          await interaction.reply({
+            embeds: [detailEmbed],
+            ephemeral: true,
+            components: [
+              new ActionRowBuilder().addComponents(
+                new ButtonBuilder()
+                  .setCustomId(`copy_${codeName.toLowerCase()}`)
+                  .setLabel(`Copy ${codeName}`)
+                  .setStyle(ButtonStyle.Success)
+                  .setEmoji('📋')
+              )
+            ]
+          });
+        }
+      }
+    }
+  }
+  
+    //phần khác
     if (interaction.customId === 'copy_bedrock_ip') {
       await interaction.reply({
         content: '📱 **Bấm giữ vào ip mà coppy đê:**\n```yummc.online```\nPort: `25570`\nPhiên bản: 1.21.111+',

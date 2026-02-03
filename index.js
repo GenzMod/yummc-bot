@@ -603,7 +603,7 @@ Bot : Không
             inline: false
           }
         )
-        .setImage('https://i.imgur.com/minecraft-banner.png') // Thêm banner nếu có
+        .setImage('https://cdn.discordapp.com/attachments/1453047727117172927/1468059669896626207/87C09904-456F-47EA-A678-2517457545F8.png?ex=6982a49c&is=6981531c&hm=cb81830c1986dc5a6ab186607e3069c37d85db720692d94b110306ad22d8e1e4&') // Thêm banner nếu có
         .setFooter({ 
           text: '🎮 EternalSMP - Kết nối cộng đồng Minecraft Việt Nam',
           iconURL: 'https://cdn.discordapp.com/attachments/1453047727117172927/1468059669896626207/87C09904-456F-47EA-A678-2517457545F8.png?ex=6982a49c&is=6981531c&hm=cb81830c1986dc5a6ab186607e3069c37d85db720692d94b110306ad22d8e1e4&'

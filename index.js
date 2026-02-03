@@ -236,7 +236,7 @@ async function handleOpenModal(interaction) {
   } catch (error) {
     console.error('Lỗi khi mở modal:', error);
     await interaction.reply({
-      content: '❌ Không thể mở form nhập liệu!',
+      content: '❌ Không thể mở form nhậpp liệu!',
       ephemeral: true
     });
   }

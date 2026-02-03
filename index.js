@@ -535,7 +535,7 @@ Bot : Không
           },
           {
             name: '🟢 ⚔️ Eco Sword',
-            value: '```✅ Tạm đóng```',
+            value: '```✅ Đã mở```',
             inline: true
           },
           {
@@ -1021,6 +1021,7 @@ client.login(process.env.TOKEN).catch(error => {
   process.exit(1);
 
 });
+
 
 
 

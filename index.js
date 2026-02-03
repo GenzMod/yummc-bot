@@ -738,7 +738,7 @@ client.on("interactionCreate", async interaction => {
           }
         )
         .setImage(process.env.PAY_QR_IMAGE)
-        .setFooter({ text: "GachCloud Payment System" })
+        .setFooter({ text: "cre Yummc" })
         .setTimestamp();
 
       await interaction.reply({ embeds: [embed] });

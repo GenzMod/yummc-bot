@@ -434,16 +434,16 @@ Bot : Không
         .setDescription('Danh sách các lệnh có sẵn:')
         .addFields(
           { name: '🎮 **LỆNH MINECRAFT**', value: '────────────' },
-          { name: '`/online` hoặc `!online`', value: 'Xem trạng thái server Minecraft', inline: true },
+          { name: '`/online` hoặc `online`', value: 'Xem trạng thái server Minecraft', inline: true },
           
           { name: '📊 **LỆNH THÔNG TIN**', value: '────────────' },
-          { name: '`/info` hoặc `!info`', value: 'Thông tin về bot', inline: true },
-          { name: '`/ping` hoặc `!ping`', value: 'Kiểm tra độ trễ của bot', inline: true },
-          { name: '`!getid [@user]`', value: 'Xem ID của người dùng', inline: true },
-          { name: '`!owner`', value: 'Xem thông tin chủ bot', inline: true },
+          { name: '`/info` hoặc `info`', value: 'Thông tin về bot', inline: true },
+          { name: '`/ping` hoặc `ping`', value: 'Kiểm tra độ trễ của bot', inline: true },
+          { name: '`getid [@user]`', value: 'Xem ID của người dùng', inline: true },
+          { name: '`owner`', value: 'Xem thông tin chủ bot', inline: true },
           
           { name: '🌐 **LỆNH IP SERVER**', value: '────────────' },
-          { name: '`!ip`', value: 'Xem thông tin IP server Minecraft', inline: true },
+          { name: '`ip`', value: 'Xem thông tin IP server Minecraft', inline: true },
           
           { name: '💰 **THANH TOÁN**', value: '────────────' },
           { name: '`/thanhtoan`', value: 'Thông tin thanh toán + mã QR', inline: true }

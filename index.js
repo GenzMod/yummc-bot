@@ -648,7 +648,7 @@ Bot : Không
           name: 'SS2',
           emoji: '⚡', 
           color: '#3498DB',
-          rewards: ['4 Key Gold', '1 Key Amethyst', '1 Key Crimson'],
+          rewards: ['5 Key Gold', '1 Key Amethyst'],
           description: 'Code sự kiện Season 2',
           status: '🟢 ACTIVE'
         },
@@ -658,6 +658,14 @@ Bot : Không
           color: '#E74C3C',
           rewards: ['500 Shard', '10000 money'],
           description: 'Chào mừng sự trợ lại của SV',
+          status: '🟢 ACTIVE'
+        },         
+        {
+          name: 'LIMIT',
+          emoji: '💍',
+          color: '#E74C3C',
+          rewards: ['400 Shard', '20000 money'],
+          description: 'Code Limit chỉ có 10 slot',
           status: '🟢 ACTIVE'
         },
         {

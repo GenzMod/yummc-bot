@@ -637,36 +637,36 @@ Bot : Không
       // Tạo các field với card design cho từng code
       const codes = [
         {
-          name: 'WELCOME',
+          name: 'welcome',
           emoji: '🎊',
           color: '#2ECC71',
-          rewards: ['5,000 Coins', 'Rương Vật Phẩm', 'VIP 3 ngày', 'Pet Mèo Dễ Thương'],
-          description: 'Code chào mừng tân thủ',
+          rewards: ['1 Hộp Suke Giáp', 'Và Hộp Suke Thuốc'],
+          description: 'Code chào mừng tân thủ, hỗ trợ mn đầu game đỡ khó khăn hơn',
           status: '🟢 ACTIVE'
         },
         {
           name: 'SS2',
           emoji: '⚡', 
           color: '#3498DB',
-          rewards: ['10,000 Coins', 'Skin Độc Quyền', 'Pet SS2 Limited', 'Wings Bay'],
+          rewards: ['4 Key Gold', '1 Key Amethyst', '1 Key Crimson'],
           description: 'Code sự kiện Season 2',
-          status: '🟡 LIMITED'
-        },
-        {
-          name: 'DENBUN',
-          emoji: '🍩',
-          color: '#E74C3C',
-          rewards: ['7,500 Coins', 'Donut Buff', 'Voucher 20%', 'Food Bundle'],
-          description: 'Code hợp tác DenBun',
           status: '🟢 ACTIVE'
         },
         {
-          name: 'TANXUAN9K',
+          name: 'COMBACK',
+          emoji: '🍩',
+          color: '#E74C3C',
+          rewards: ['500 Shard', '10000 money'],
+          description: 'Chào mừng sự trợ lại của SV',
+          status: '🟢 ACTIVE'
+        },
+        {
+          name: 'DONXUAN',
           emoji: '🌸',
           color: '#9B59B6',
-          rewards: ['9,000 Coins', 'Áo Dài Tết', 'Pháo Hoa', 'Lì Xì May Mắn'],
-          description: 'Code mừng xuân 9K',
-          status: '🔴 EXPIRED SOON'
+          rewards: ['20000 money'],
+          description: 'sắp tết nên ra code',
+          status: '🟢 ACTIVE'
         }
       ];
       
@@ -690,12 +690,12 @@ Bot : Không
         },
         {
           name: '📊 **THỐNG KÊ**',
-          value: '```diff\n+ 4 code đang hoạt động\n! 1 code sắp hết hạn\n- 0 code đã hết hạn\n```',
+          value: '```diff\n+ 4 code đang hoạt động\n- 0 code đã hết hạn\n```',
           inline: true
         },
         {
           name: '⏰ **CẬP NHẬT**',
-          value: '```Hôm nay, 15:30```',
+          value: '```Hôm nay, 17:07```',
           inline: true
         },
         {
@@ -1113,7 +1113,7 @@ client.on("interactionCreate", async interaction => {
               { name: '🎯 **PHẦN THƯỞNG**', value: detail.rewards, inline: false },
               { name: '⏰ **HẠN SỬ DỤNG**', value: detail.expires, inline: true },
               { name: '🔢 **SỐ LẦN DÙNG**', value: detail.usage, inline: true },
-              { name: '🎮 **CÁCH DÙNG**', value: '```/redeem ' + codeName + '```', inline: false }
+              { name: '🎮 **CÁCH DÙNG**', value: '```/code ' + codeName + '```', inline: false }
             )
             .setFooter({ text: 'Nhấn Copy để sao chép code' })
             .setTimestamp();
@@ -1165,5 +1165,6 @@ client.login(process.env.TOKEN).catch(error => {
   process.exit(1);
 
 });
+
 
 

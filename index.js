@@ -31,7 +31,7 @@ const client = new Client({
   partials: [Partials.Channel]
 });
 
-const PREFIX = "!";
+const PREFIX = "";
 let lastStatus = null;
 
 // 🔐 Cấu hình role permissions
@@ -442,6 +442,9 @@ Bot : Không
           { name: '`!getid [@user]`', value: 'Xem ID của người dùng', inline: true },
           { name: '`!owner`', value: 'Xem thông tin chủ bot', inline: true },
           
+          { name: '🌐 **LỆNH IP SERVER**', value: '────────────' },
+          { name: '`!ip`', value: 'Xem thông tin IP server Minecraft', inline: true },
+          
           { name: '💰 **THANH TOÁN**', value: '────────────' },
           { name: '`/thanhtoan`', value: 'Thông tin thanh toán + mã QR', inline: true }
         )
@@ -586,7 +589,7 @@ Bot : Không
           },
           {
             name: '📢 Thông báo',
-            value: '```Đang bảo trì, Sẽ mở lại sv vào cuối tuần này. Cụ thể là Chủ Nhật```',
+            value: '```Đang bảo trì, Sẽ mở lại sv vào tối nay```',
             inline: false
           },
           {
@@ -875,14 +878,14 @@ client.on("interactionCreate", async interaction => {
   if (interaction.isButton()) {
     if (interaction.customId === 'copy_java_ip') {
       await interaction.reply({
-        content: '📋 **Java IP đã được copy:**\n```yummc.online```\nPhiên bản: 1.18.x - 1.21.x',
+        content: '📋 **Bấm giữ vào ip mà coppy đê:**\n```yummc.online```\nPhiên bản: 1.18.x - 1.21.x',
         ephemeral: true
       });
     }
     
     if (interaction.customId === 'copy_bedrock_ip') {
       await interaction.reply({
-        content: '📱 **Bedrock IP đã được copy:**\n```yummc.online```\nPort: `25570`\nPhiên bản: 1.21.111+',
+        content: '📱 **Bấm giữ vào ip mà coppy đê:**\n```yummc.online```\nPort: `25570`\nPhiên bản: 1.21.111+',
         ephemeral: true
       });
     }

@@ -653,7 +653,7 @@ Bot : Không
           emoji: '💍',
           color: '#E74C3C',
           rewards: ['400 Shard', '20000 money'],
-          description: 'Code Limit chỉ có 10 slot',
+          description: 'Code Limit chỉ còn 3 slot cuối',
           status: '🟢 ACTIVE'
         },
         {
@@ -691,7 +691,7 @@ Bot : Không
         },
         {
           name: '⏰ **CẬP NHẬT**',
-          value: '```Hôm nay, 17:07```',
+          value: '```Hôm nay, 13:015```',
           inline: true
         },
         {
@@ -701,7 +701,7 @@ Bot : Không
         },
         {
           name: '🎯 **TỶ LỆ SỬ DỤNG**',
-          value: '```23% đã dùng```',
+          value: '```53% đã dùng```',
           inline: true
         }
       )

@@ -578,7 +578,7 @@ Bot : Không
           },
           {
             name: '📢 Thông báo',
-            value: '```Đang bảo trì, Sẽ mở lại sv vào tối nay```',
+            value: '```Đang mở```',
             inline: false
           },
           {

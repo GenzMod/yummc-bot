@@ -701,7 +701,7 @@ Bot : Không
         },
         {
           name: '🎯 **TỶ LỆ SỬ DỤNG**',
-          value: '```92% đã dùng```',
+          value: '```23% đã dùng```',
           inline: true
         }
       )

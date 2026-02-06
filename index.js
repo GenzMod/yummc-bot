@@ -653,7 +653,7 @@ Bot : Không
           emoji: '💍',
           color: '#E74C3C',
           rewards: ['400 Shard', '20000 money'],
-          description: 'Code Limit chỉ còn 3 slot cuối',
+          description: 'Code Limit hết hàng',
           status: '🟢 ACTIVE'
         },
         {

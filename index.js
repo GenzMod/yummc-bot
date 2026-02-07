@@ -344,27 +344,87 @@ client.on("messageCreate", async message => {
     }
     
     /* ===== !rank ===== */
-    if (cmd === "rank") {
-      const user = message.mentions.users.first() || message.author;
+if (cmd === "rank") {
+  const rankEmbed = new EmbedBuilder()
+    .setColor('#F1C40F')
+    .setTitle('👑 **DANH SÁCH RANK SERVER** 👑')
+    .setDescription('✨ **Quyền lợi & đặc quyền của từng rank** ✨')
+    .setThumbnail('https://i.imgur.com/crown.png')
+    .setImage('https://i.imgur.com/rainbow_banner.png')
+    .addFields(
+      {
+        name: '━━━━━━━━━━━━━━━━━━━━━━',
+        value: ' ',
+        inline: false
+      }
+    );
 
-      const embed = new EmbedBuilder()
-        .setColor("#ff5fa2")
-        .setTitle("👑 THÔNG TIN RANK")
-        .setThumbnail(user.displayAvatarURL({ dynamic: true }))
-      const codes = [
-         {
-          name: 'đôn nết',
-          emoji: '💵',
-          color: '#2ECC71',
-          rewards: ['1 Hộp Suke Giáp', 'Và Hộp Suke Thuốc'],
-          description: 'Code chào mừng tân thủ, hỗ trợ mn đầu game đỡ khó khăn hơn',
-          status: '🟢 ACTIVE'
-        }
-        ]
-        .setFooter({ text: "YumMC Bot" });
-
-      return message.channel.send({ embeds: [embed] });
+  const ranks = [
+    {
+      name: 'VIP',
+      emoji: '💎',
+      color: '#2ECC71',
+      benefits: [
+        '+10% EXP',
+        '+10% Money',
+        'Dùng /fly'
+      ],
+      description: 'Rank cơ bản dành cho người chơi ủng hộ server',
+      price: '50.000 VNĐ'
+    },
+    {
+      name: 'VIP+',
+      emoji: '🔥',
+      color: '#3498DB',
+      benefits: [
+        '+20% EXP',
+        '+20% Money',
+        '/fly, /heal'
+      ],
+      description: 'Nâng cấp từ VIP, nhiều tiện ích hơn',
+      price: '100.000 VNĐ'
+    },
+    {
+      name: 'MVP',
+      emoji: '👑',
+      color: '#9B59B6',
+      benefits: [
+        '+30% EXP',
+        '+30% Money',
+        '/fly, /heal, /feed'
+      ],
+      description: 'Rank cao cấp cho người chơi lâu dài',
+      price: '200.000 VNĐ'
+    },
+    {
+      name: 'LEGEND',
+      emoji: '🐉',
+      color: '#E74C3C',
+      benefits: [
+        '+50% EXP',
+        '+50% Money',
+        'Tất cả lệnh đặc biệt'
+      ],
+      description: 'Rank tối thượng – đặc quyền toàn server',
+      price: '300.000 VNĐ'
     }
+  ];
+
+  ranks.forEach(rank => {
+    rankEmbed.addFields({
+      name: `${rank.emoji} **${rank.name}**`,
+      value:
+        `📜 **Mô tả:** ${rank.description}\n` +
+        `🎁 **Quyền lợi:**\n` +
+        rank.benefits.map(b => `• ${b}`).join('\n') +
+        `\n💰 **Giá:** ${rank.price}`,
+      inline: false
+    });
+  });
+
+  message.channel.send({ embeds: [rankEmbed] });
+}
+
 
     /* ===== !owner ===== */
     if (cmd === "owner") {

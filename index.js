@@ -351,7 +351,7 @@ client.on("messageCreate", async message => {
         .setColor("#ff5fa2")
         .setTitle("👑 THÔNG TIN RANK")
         .setThumbnail(user.displayAvatarURL({ dynamic: true }))
-        .addFields(
+      const codes = [
          {
           name: 'đôn nết',
           emoji: '💵',
@@ -360,7 +360,7 @@ client.on("messageCreate", async message => {
           description: 'Code chào mừng tân thủ, hỗ trợ mn đầu game đỡ khó khăn hơn',
           status: '🟢 ACTIVE'
         }
-        )
+        ];
         .setFooter({ text: "YumMC Bot" });
 
       return message.channel.send({ embeds: [embed] });

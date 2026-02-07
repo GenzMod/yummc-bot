@@ -352,16 +352,28 @@ if (cmd === "rank") {
     .setDescription('✨ **Danh sách rank hiện có & quyền lợi** ✨')
     .setThumbnail('https://i.imgur.com/crown.png')
     .addFields({
-      name: ':diamond:━━━━━━━━━━━━━━━━━━━━━━━:diamond:',
+      name: '━━━━━━━━━━━━━━━━━━━━━━━',
       value: ' ',
       inline: false
     });
 
   const ranks = [
     {
+      name: 'ĐÔN NẾT',
+      emoji: '💵',
+      description: 'Rank cơ bản dành cho người chơi ủng hộ server',
+      benefits: [
+        '+10% EXP',
+        '+10% Money',
+        'Dùng lệnh /fly'
+      ],
+      price: '20.000 VNĐ',
+      status: '🟢 ACTIVE'
+    },
+    {
       name: 'VIP',
       emoji: '💎',
-      description: 'Rank cơ bản dành cho người chơi ủng hộ server',
+      description: 'Nâng cấp từ Đôn nết, nhiều tiện ích hơn',
       benefits: [
         '+10% EXP',
         '+10% Money',
@@ -386,7 +398,7 @@ if (cmd === "rank") {
       name: 'MVP',
       emoji: '👑',
       description: 'Rank cao cấp cho người chơi lâu dài',
-      benefits: [
+      benefits: [ 
         '+30% EXP',
         '+30% Money',
         '/fly, /heal, /feed'
@@ -433,11 +445,11 @@ if (cmd === "rank") {
       inline: false
     },
     {
-      name: '📊 **THỐNG KÊ**',
+      name: '📊 **QUYỀN LỢI ƯU ĐÃI**',
       value:
         "```" +
-        `+ ${activeRanks} rank đang hoạt động\n` +
-        `- ${inactiveRanks} rank đã ngừng bán` +
+        `+ ${activeRanks} Cứ nạp mỗi 2K\n` +
+        `- ${inactiveRanks} Được tặng 1 lồng Spawner tự chọn` +
         "```",
       inline: false
     }

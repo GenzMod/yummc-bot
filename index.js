@@ -349,17 +349,17 @@ client.on("messageCreate", async message => {
 
       const embed = new EmbedBuilder()
         .setColor("#ff5fa2")
-        .setTitle("🆔 THÔNG TIN RANK")
+        .setTitle("👑 THÔNG TIN RANK")
         .setThumbnail(user.displayAvatarURL({ dynamic: true }))
         .addFields(
-          { name: "👤 Đôn Nết", value: `Nạp 20k có rank`, inline: true },
-          { name: "🏷️ Tag", value: user.username, inline: true },
-          { name: "🆔 ID", value: user.id },
-          { name: "🤖 Bot", value: user.bot ? "Có" : "Không" },
-          {
-            name: "📆 Tạo",
-            value: `<t:${Math.floor(user.createdTimestamp / 1000)}:R>`
-          }
+         {
+          name: 'đôn nết',
+          emoji: '💵',
+          color: '#2ECC71',
+          rewards: ['1 Hộp Suke Giáp', 'Và Hộp Suke Thuốc'],
+          description: 'Code chào mừng tân thủ, hỗ trợ mn đầu game đỡ khó khăn hơn',
+          status: '🟢 ACTIVE'
+        }
         )
         .setFooter({ text: "YumMC Bot" });
 

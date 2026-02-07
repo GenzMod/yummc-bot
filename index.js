@@ -345,82 +345,103 @@ client.on("messageCreate", async message => {
     
     /* ===== !rank ===== */
 if (cmd === "rank") {
+
   const rankEmbed = new EmbedBuilder()
-    .setColor('#F1C40F')
-    .setTitle('👑 **DANH SÁCH RANK SERVER** 👑')
-    .setDescription('✨ **Quyền lợi & đặc quyền của từng rank** ✨')
+    .setColor('#9B59B6')
+    .setTitle('👑 **KHO BÁU RANK – ĐẶC QUYỀN SERVER** 👑')
+    .setDescription('✨ **Danh sách rank hiện có & quyền lợi** ✨')
     .setThumbnail('https://i.imgur.com/crown.png')
-    .setImage('https://i.imgur.com/rainbow_banner.png')
-    .addFields(
-      {
-        name: '━━━━━━━━━━━━━━━━━━━━━━',
-        value: ' ',
-        inline: false
-      }
-    );
+    .addFields({
+      name: ':diamond:━━━━━━━━━━━━━━━━━━━━━━━:diamond:',
+      value: ' ',
+      inline: false
+    });
 
   const ranks = [
     {
       name: 'VIP',
       emoji: '💎',
-      color: '#2ECC71',
+      description: 'Rank cơ bản dành cho người chơi ủng hộ server',
       benefits: [
         '+10% EXP',
         '+10% Money',
-        'Dùng /fly'
+        'Dùng lệnh /fly'
       ],
-      description: 'Rank cơ bản dành cho người chơi ủng hộ server',
-      price: '50.000 VNĐ'
+      price: '50.000 VNĐ',
+      status: '🟢 ACTIVE'
     },
     {
       name: 'VIP+',
-      emoji: '🔥',
-      color: '#3498DB',
+      emoji: '⚡',
+      description: 'Nâng cấp từ VIP, nhiều tiện ích hơn',
       benefits: [
         '+20% EXP',
         '+20% Money',
         '/fly, /heal'
       ],
-      description: 'Nâng cấp từ VIP, nhiều tiện ích hơn',
-      price: '100.000 VNĐ'
+      price: '100.000 VNĐ',
+      status: '🟢 ACTIVE'
     },
     {
       name: 'MVP',
       emoji: '👑',
-      color: '#9B59B6',
+      description: 'Rank cao cấp cho người chơi lâu dài',
       benefits: [
         '+30% EXP',
         '+30% Money',
         '/fly, /heal, /feed'
       ],
-      description: 'Rank cao cấp cho người chơi lâu dài',
-      price: '200.000 VNĐ'
+      price: '200.000 VNĐ',
+      status: '🟢 ACTIVE'
     },
     {
       name: 'LEGEND',
       emoji: '🐉',
-      color: '#E74C3C',
+      description: 'Rank tối thượng – đặc quyền toàn server',
       benefits: [
         '+50% EXP',
         '+50% Money',
-        'Tất cả lệnh đặc biệt'
+        'Toàn bộ lệnh đặc biệt'
       ],
-      description: 'Rank tối thượng – đặc quyền toàn server',
-      price: '300.000 VNĐ'
+      price: '300.000 VNĐ',
+      status: '🟢 ACTIVE'
     }
   ];
 
+  // 🔹 Render từng rank thành card có khung
   ranks.forEach(rank => {
     rankEmbed.addFields({
-      name: `${rank.emoji} **${rank.name}**`,
+      name: `${rank.emoji} **${rank.name}** • ${rank.status}`,
       value:
-        `📜 **Mô tả:** ${rank.description}\n` +
-        `🎁 **Quyền lợi:**\n` +
-        rank.benefits.map(b => `• ${b}`).join('\n') +
-        `\n💰 **Giá:** ${rank.price}`,
+        "```" +
+        `${rank.description}\n\n` +
+        rank.benefits.map(b => `➤ ${b}`).join('\n') +
+        `\n\n💰 Giá: ${rank.price}` +
+        "```",
       inline: false
     });
   });
+
+  // 📊 Thống kê
+  const activeRanks = ranks.filter(r => r.status.includes('🟢')).length;
+  const inactiveRanks = ranks.length - activeRanks;
+
+  rankEmbed.addFields(
+    {
+      name: '⭐━━━━━━━━━━━━━━━━━━━━━━━⭐',
+      value: ' ',
+      inline: false
+    },
+    {
+      name: '📊 **THỐNG KÊ**',
+      value:
+        "```" +
+        `+ ${activeRanks} rank đang hoạt động\n` +
+        `- ${inactiveRanks} rank đã ngừng bán` +
+        "```",
+      inline: false
+    }
+  );
 
   message.channel.send({ embeds: [rankEmbed] });
 }

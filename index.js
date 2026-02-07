@@ -342,6 +342,29 @@ client.on("messageCreate", async message => {
 
       return message.channel.send({ embeds: [embed] });
     }
+    
+    /* ===== !rank ===== */
+    if (cmd === "rank") {
+      const user = message.mentions.users.first() || message.author;
+
+      const embed = new EmbedBuilder()
+        .setColor("#ff5fa2")
+        .setTitle("🆔 THÔNG TIN RANK")
+        .setThumbnail(user.displayAvatarURL({ dynamic: true }))
+        .addFields(
+          { name: "👤 Đôn Nết", value: `Nạp 20k có rank`, inline: true },
+          { name: "🏷️ Tag", value: user.username, inline: true },
+          { name: "🆔 ID", value: user.id },
+          { name: "🤖 Bot", value: user.bot ? "Có" : "Không" },
+          {
+            name: "📆 Tạo",
+            value: `<t:${Math.floor(user.createdTimestamp / 1000)}:R>`
+          }
+        )
+        .setFooter({ text: "YumMC Bot" });
+
+      return message.channel.send({ embeds: [embed] });
+    }
 
     /* ===== !owner ===== */
     if (cmd === "owner") {

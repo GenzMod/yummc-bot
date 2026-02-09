@@ -343,6 +343,47 @@ client.on("messageCreate", async message => {
       return message.channel.send({ embeds: [embed] });
     }
     
+    
+   /* ====== !authme ==== */
+if (cmd === "authme") {
+
+  const todayCode = "25012006"; // 🔐 mã bảo mật hôm nay
+
+  const authEmbed = new EmbedBuilder()
+    .setColor('#E67E22')
+    .setTitle('🔐 **XÁC THỰC TÀI KHOẢN** 🔐')
+    .setDescription('✨ **Hệ thống bảo mật đăng nhập server** ✨')
+    .setThumbnail('https://i.imgur.com/lock.png')
+    .addFields(
+      {
+        name: ':diamond:━━━━━━━━━━━━━━━━━━━━━━━:diamond:',
+        value: ' ',
+        inline: false
+      },
+      {
+        name: '🛡️ **MÃ BẢO MẬT HÔM NAY**',
+        value:
+          "```" +
+          `Mã bảo mật của ngày hôm nay là:\n\n` +
+          `🔑 ${todayCode}` +
+          "```",
+        inline: false
+      },
+      {
+        name: '📌 **LƯU Ý**',
+        value:
+          "```" +
+          `• Không chia sẻ mã này ra ngoài nhóm của sv\n` +
+          `• Nhập mã này trong game để xác thực\n` +
+          `• Mã sẽ thay đổi mỗi ngày` +
+          "```",
+        inline: false
+      }
+    );
+
+  message.channel.send({ embeds: [authEmbed] });
+}
+    
     /* ===== !rank ===== */
 if (cmd === "rank") {
 

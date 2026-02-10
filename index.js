@@ -347,7 +347,7 @@ client.on("messageCreate", async message => {
    /* ====== !authme ==== */
 if (cmd === "authme") {
 
-  const todayCode = "25012006"; // 🔐 mã bảo mật hôm nay
+  const todayCode = "pornhub"; // 🔐 mã bảo mật hôm nay
 
   const authEmbed = new EmbedBuilder()
     .setColor('#E67E22')

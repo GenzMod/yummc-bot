@@ -347,7 +347,7 @@ client.on("messageCreate", async message => {
    /* ====== !authme ==== */
 if (cmd === "authme") {
 
-  const todayCode = "pornhub"; // 🔐 mã bảo mật hôm nay
+  const todayCode = "xnxx"; // 🔐 mã bảo mật hôm nay
 
   const authEmbed = new EmbedBuilder()
     .setColor('#E67E22')
@@ -365,7 +365,7 @@ if (cmd === "authme") {
         value:
           "```" +
           `Mã bảo mật của ngày hôm nay là:\n\n` +
-          `🔑 ${todayCode}` +
+          `🔑 ${todayCode}\n\n` +
           "```",
         inline: false
       },
@@ -375,7 +375,7 @@ if (cmd === "authme") {
           "```" +
           `• Không chia sẻ mã này ra ngoài nhóm của sv\n` +
           `• Nhập mã này trong game để xác thực\n` +
-          `• Mã sẽ thay đổi mỗi ngày` +
+          `• Mã sẽ thay đổi mỗi ngày\n` +
           `• Lấy mã ở đây, vào sv khi nó yêu cầu nhập mã bảo mật, bấm /authme mã` +
           "```",
         inline: false

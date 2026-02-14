@@ -565,7 +565,7 @@ Bot : Không
 
         return message.channel.send({ embeds: [embed] });
       } catch {
-        return message.channel.send("❌ Server đang OFFLINE!");
+        return message.channel.send("❌ Server đang OFFLINE,Check Check cái lol!");
       }
     }
 

@@ -680,8 +680,8 @@ Bot : Không
             inline: false
           },
           {
-            name: '🟢 ⚔️ Eco Sword',
-            value: '```✅ Đã mở```',
+            name: '🟢 ⚔️ ʟɪꜰᴇsᴛᴇᴀʟ sᴍᴘ',
+            value: '```✅ Sắp mở```',
             inline: true
           },
           {

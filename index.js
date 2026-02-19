@@ -786,23 +786,23 @@ Bot : Không
           name: 'welcome',
           emoji: '🎊',
           color: '#2ECC71',
-          rewards: ['1 Hộp Suke Giáp', 'Và Hộp Suke Thuốc'],
+          rewards: ['Vào nhập là biết'],
           description: 'Code chào mừng tân thủ, hỗ trợ mn đầu game đỡ khó khăn hơn',
           status: '🟢 ACTIVE'
         },
         {
-          name: 'SS2',
+          name: 'ss3',
           emoji: '⚡', 
           color: '#3498DB',
-          rewards: ['5 Key Gold', '1 Key Amethyst'],
-          description: 'Code sự kiện Season 2',
+          rewards: ['Vào nhập là biết ', 'Vào nhập là biết'],
+          description: 'Code sự kiện Season 3',
           status: '🟢 ACTIVE'
         },
         {
-          name: 'COMBACK',
+          name: 'baotri',
           emoji: '🍩',
           color: '#E74C3C',
-          rewards: ['500 Shard', '10000 money'],
+          rewards: ['Nhập là biết ', 'Nhập là biết'],
           description: 'Chào mừng sự trợ lại của SV',
           status: '🟢 ACTIVE'
         },         
@@ -812,7 +812,7 @@ Bot : Không
           color: '#E74C3C',
           rewards: ['400 Shard', '20000 money'],
           description: 'Code Limit hết hàng',
-          status: '🟢 ACTIVE'
+          status: '🔴'
         },
         {
           name: 'DONXUAN',
@@ -820,7 +820,7 @@ Bot : Không
           color: '#9B59B6',
           rewards: ['20000 money'],
           description: 'sắp tết nên ra code',
-          status: '🟢 ACTIVE'
+          status: '🔴'
         }
       ];
       

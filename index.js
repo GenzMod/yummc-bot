@@ -886,7 +886,7 @@ Bot : Không
         "💘 Xem xong đảm bảo tim đập chân run, crush cũng phải say nắng.\n\n" +
         "📸 Click vào ảnh bên dưới để chiêm ngưỡng tuyệt phẩm!"
       )
-      .setImage("https://i.imgur.com/yourImage.jpg") // thay link ảnh nóng meme/bựa vào đây
+      .setImage(process.env.ANH_NONG_IMAGE) // thay link ảnh nóng meme/bựa vào đây
       .setFooter({ text: "Nguồn: Hội Những Người Thích Drama" })
       .setTimestamp();
 

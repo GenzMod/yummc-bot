@@ -871,8 +871,9 @@ Bot : Không
     return message.reply({ embeds: [codeEmbed] });
     }
     
-    /* ====== ẩnh nóng ======= */
-    client.on("messageCreate", async (message) => {
+    /* ========= ảnh nóng ===== */
+
+     client.on("messageCreate", async (message) => {
   if (message.author.bot) return;
 
   // Kiểm tra tin nhắn chứa "ảnh nóng"
@@ -892,7 +893,7 @@ Bot : Không
 
     await message.channel.send({ embeds: [embed] });
   }
-});
+
       
     /* ===== !gui (Prefix) - KIỂM TRA ROLE ===== */
     if (cmd === "gui") {

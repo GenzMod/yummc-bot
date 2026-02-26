@@ -870,31 +870,6 @@ Bot : Không
       .setTimestamp();
     return message.reply({ embeds: [codeEmbed] });
     }
-    
-    /* ========= ảnh nóng ===== */
-
-     client.on("messageCreate", async (message) => {
-  if (message.author.bot) return;
-
-  // Kiểm tra tin nhắn chứa "ảnh nóng"
-  if (message.content.toLowerCase().includes("ảnh nóng")) {
-    const embed = new EmbedBuilder()
-      .setColor("#ff3366")
-      .setTitle("🔥 ẢNH NÓNG HOT NHẤT TUẦN 🔥")
-      .setDescription(
-        "🚨 Cảnh báo: Nội dung cực kỳ nóng bỏng!\n\n" +
-        "👉 Đây là bộ ảnh nóng nhất tuần này do hội FA bình chọn.\n" +
-        "💘 Xem xong đảm bảo tim đập chân run, crush cũng phải say nắng.\n\n" +
-        "📸 Click vào ảnh bên dưới để chiêm ngưỡng tuyệt phẩm!"
-      )
-      .setImage(process.env.ANH_NONG_IMAGE) // thay link ảnh nóng meme/bựa vào đây
-      .setFooter({ text: "Nguồn: Hội Những Người Thích Drama" })
-      .setTimestamp();
-
-    await message.channel.send({ embeds: [embed] });
-  }
- });
-}
       
     /* ===== !gui (Prefix) - KIỂM TRA ROLE ===== */
     if (cmd === "gui") {

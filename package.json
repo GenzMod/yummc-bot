@@ -14,6 +14,5 @@
     "discord.js": "^14.25.1",
     "dotenv": "^17.2.3",
     "minecraft-server-util": "^5.4.4",
-    "groq-sdk": "^0.5.0"
   }
 }

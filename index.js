@@ -40,27 +40,26 @@ const client = new Client({
 const PREFIX = "";
 let lastStatus = null;
 
-async function getAIReply(username, content) {
+async function getAIReply(userMessage) {
   try {
-    const res = await ai.chat.completions.create({
-      model: "gpt-4.1-mini",
+    const chat = await groq.chat.completions.create({
+      model: "llama3-70b-8192",
       messages: [
         {
           role: "system",
-          content:
-            "Bạn là NPC của server Minecraft YumMC. Trả lời ngắn gọn, thân thiện, hướng dẫn người chơi server."
+          content: "Bạn là NPC AI trong server Minecraft, nói chuyện vui vẻ, thân thiện với người chơi.",
         },
         {
           role: "user",
-          content: content
-        }
-      ]
+          content: userMessage,
+        },
+      ],
     });
 
-    return res.choices[0].message.content;
+    return chat.choices[0].message.content;
   } catch (err) {
-    console.error("AI error:", err);
-    return "🤖 NPC đang bận, thử lại sau nhé bro.";
+    console.error("Groq error:", err);
+    return "NPC đang bận, thử lại sau 😵";
   }
 }
 

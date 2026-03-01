@@ -19,6 +19,11 @@ const {
 } = require("discord.js");
 const { status } = require("minecraft-server-util");
 
+const OpenAI = require("openai");
+const ai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+});
+
 /* ================= CLIENT ================= */
 const client = new Client({
   intents: [
@@ -34,67 +39,35 @@ const client = new Client({
 const PREFIX = "";
 let lastStatus = null;
 
+async function getAIReply(username, content) {
+  try {
+    const res = await ai.chat.completions.create({
+      model: "gpt-4.1-mini",
+      messages: [
+        {
+          role: "system",
+          content:
+            "Bạn là NPC của server Minecraft YumMC. Trả lời ngắn gọn, thân thiện, hướng dẫn người chơi server."
+        },
+        {
+          role: "user",
+          content: content
+        }
+      ]
+    });
+
+    return res.choices[0].message.content;
+  } catch (err) {
+    console.error("AI error:", err);
+    return "🤖 NPC đang bận, thử lại sau nhé bro.";
+  }
+}
+
 // 📊 Đếm số tin nhắn mỗi user trong server
 const messageCount = new Map();
 
 // 🤖 KIẾN THỨC AI NPC SERVER //
-const npcKnowledge = [
-  {
-    keywords: ["farm", "nông", "trồng"],
-    answer: "🌾 Bạn có thể farm tại **/warp farm** hoặc khu nông trại cộng đồng."
-  },
-  {
-    keywords: ["mine", "đào", "quặng"],
-    answer: "⛏️ Bạn có thể đào khoáng sản tại **/warp mine**."
-  },
-  {
-    keywords: ["tiền", "money", "kiếm tiền"],
-    answer:
-      "💰 Cách kiếm tiền:\n• Bán vật phẩm tại **/warp shop**\n• Farm mob\n• Làm nhiệm vụ"
-  },
-  {
-    keywords: ["ai là ng xinh nhất", "ai đẹp nhất sv", "ai là ng đẹp", "ai xinh đẹp nhất", "xinh đẹp"],
-    answer: "💖 Người xinh đẹp nhất server là <@774259560163704842> ✨"
-  },
-  {
-    keywords: ["ai là gay", "gay nhất sv", "gay nhất server"],
-    answer: "🌈 Người gay nhất server là <@1446096383235981322> 😏"
-  },
-  {
-    keywords: ["cách dup", "cách dupper", "làm sao để dupp sv", "làm sao để dupper sv", "cách nào để dupper sv"],
-    answer: "🌈 khoong làm mà đòi có ăn à ba... band band, band vĩnh viễn 😏"
-  },
-  {
-    keywords: ["rank"],
-    answer: "👑 Bạn có thể mua rank bằng lệnh **/rank** hoặc tại website server."
-  },
-  {
-    keywords: ["ip", "server"],
-    answer: "🌐 IP server: **yummc.online**\nPhiên bản: 1.18 → 1.21"
-  },
-  {
-    keywords: ["warp"],
-    answer:
-      "🌀 Warp phổ biến:\n• /warp farm\n• /warp mine\n• /warp shop\n• /warp spawn"
-  },
-  {
-    keywords: ["help", "giúp"],
-    answer:
-      "📖 Lệnh cơ bản:\n• /spawn\n• /warp\n• /shop\n• /ah\n• /rank"
-  }
-];
 
-function getNpcReply(content) {
-  const text = content.toLowerCase();
-
-  for (const item of npcKnowledge) {
-    if (item.keywords.some(k => text.includes(k))) {
-      return item.answer;
-    }
-  }
-
-  return "🤖 Xin lỗi, mình chưa hiểu câu hỏi.\nBạn thử hỏi về: farm, mine, tiền, rank, warp...";
-}
 
 // 🔐 Cấu hình role permissions
 const ALLOWED_ROLE_IDS = process.env.ALLOWED_ROLE_IDS 
@@ -382,11 +355,7 @@ client.on("messageCreate", async message => {
     const userId = message.author.id;
     messageCount.set(userId, (messageCount.get(userId) || 0) + 1);
     
-    // 🤖 AI NPC trigger
-  if (message.content.toLowerCase().includes("bot")) {
-    const reply = getNpcReply(message.content);
-    return message.reply(reply);
-  }
+  
   
     // ===== ẢNH NÓNG KEYWORD =====
   if (message.content.toLowerCase().includes("ảnh nóng")) {
@@ -405,6 +374,20 @@ client.on("messageCreate", async message => {
 
     return message.channel.send({ embeds: [embed] });
   }
+  
+    // 🤖 AI NPC chat khi được gọi tên
+if (
+  message.content.toLowerCase().includes("bot ơi") ||
+  message.content.toLowerCase().includes("npc ơi") ||
+  message.mentions.has(client.user)
+) {
+  const reply = await getAIReply(
+    message.author.username,
+    message.content
+  );
+
+  return message.reply(reply);
+}
   
   if (message.content.startsWith(PREFIX)) {
     const args = message.content.slice(PREFIX.length).trim().split(/ +/);

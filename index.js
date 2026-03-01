@@ -53,7 +53,7 @@ const npcKnowledge = [
       "💰 Cách kiếm tiền:\n• Bán vật phẩm tại **/warp shop**\n• Farm mob\n• Làm nhiệm vụ"
   },
   {
-    keywords: ["ai là ng xinh đẹp nhất", "ai xinh đẹp nhất", "xinh đẹp nhất"],
+    keywords: ["ai là ng xinh nhất", "ai đẹp nhất sv", "ai là ng đẹp", "ai xinh đẹp nhất", "xinh đẹp"],
     answer: "💖 Người xinh đẹp nhất server là <@774259560163704842> ✨"
   },
   {

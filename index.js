@@ -105,7 +105,7 @@ const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
       { body: commands }
     );
     console.log("✅ Slash commands đã đăng ký");
-    console.log(`🔐 Cấu hình quyền !gui: ${REQUIRE_ADMIN_FOR_GUI ? 'Chỉ Admin' : 'Theo Role'}`);
+    console.log(`🔐 Cấu hìnhh quyền !gui: ${REQUIRE_ADMIN_FOR_GUI ? 'Chỉ Admin' : 'Theo Role'}`);
     if (ALLOWED_ROLE_IDS.length > 0) {
       console.log(`👥 Role được phép: ${ALLOWED_ROLE_IDS.length} role`);
     }

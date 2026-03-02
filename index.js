@@ -713,8 +713,13 @@ Bot : Không
             inline: false
           },
           {
-            name: '🟢 ⚔️ ʟɪꜰᴇsᴛᴇᴀʟ sᴍᴘ',
-            value: '```✅ Sắp mở```',
+            name: '🟢 🌴 Thuần Sinh Tồn ',
+            value: '```✅ Host lỏ, mở mấy ní chơi tạm```',
+            inline: true
+          },
+          {
+            name: '🔴 ⚔️ ʟɪꜰᴇsᴛᴇᴀʟ sᴍᴘ',
+            value: '```❎ Sắp mở, nào có tiền thuê host mới thì mở lại```',
             inline: true
           },
           {
@@ -759,7 +764,7 @@ Bot : Không
           },
           {
             name: '🔌 Port',
-            value: '```25570```',
+            value: '```31213```',
             inline: true
           },
           {

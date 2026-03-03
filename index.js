@@ -729,8 +729,8 @@ Bot : Không
             inline: true
           },
           {
-            name: '🔴 ☁️ SkyBlock',
-            value: '```❎ Chưa mở```',
+            name: '🟢 ☁️ SkyBlock',
+            value: '```✅ Đã mở! Thử nhiệm!\n🌎ip: sky.yummc.online\n🔌port : 25565```',
             inline: true
           },
           {

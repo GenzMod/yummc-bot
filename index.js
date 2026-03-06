@@ -416,148 +416,6 @@ client.on("messageCreate", async message => {
     }
 }
 
-/* ===== kết hôn ==== */
-if(command === "kethon"){
-
-let user = message.mentions.users.first()
-
-if(!user)
-return message.reply("Hãy tag người bạn muốn kết hôn 💍")
-
-if(couples[message.author.id])
-return message.reply("Bạn đã kết hôn rồi!")
-
-if(user.id === message.author.id)
-return message.reply("Bạn không thể cưới chính mình 🤨")
-
-let now = Date.now()
-
-couples[message.author.id] = {
-partner: user.id,
-since: now,
-lastAnnounce: 0
-}
-
-couples[user.id] = {
-partner: message.author.id,
-since: now,
-lastAnnounce: 0
-}
-
-saveCouples()
-
-message.channel.send(
-`💒 **THÔNG BÁO LỄ KẾT HÔN**
-
-Hôm nay là một ngày đặc biệt tại **EternalServer Community** ✨
-
-💍 **${message.author.username}** và **${user.username}**
-đã chính thức nên duyên vợ chồng ❤️
-
-🎊 Lễ kết hôn được tổ chức tại **EternalServer Community**
-với sự góp mặt của toàn bộ member trong server.
-
-👏 Hãy cùng chúc phúc cho cặp đôi này!
-
-${message.author} ❤️ ${user}`
-)
-
-}
-
-/* ====== ly hôn ==== */
-if(command === "lyhon"){
-
-let data = couples[message.author.id]
-
-if(!data)
-return message.reply("Bạn chưa kết hôn")
-
-let partner = data.partner
-
-let days = Math.floor((Date.now() - data.since) / (1000*60*60*24))
-
-if(days < 7){
-return message.reply(
-`💔 Bạn mới kết hôn **${days} ngày**.
-Phải sau **7 ngày** mới được ly hôn.`
-)
-}
-
-delete couples[message.author.id]
-delete couples[partner]
-
-saveCouples()
-
-message.channel.send(
-`💔 **LY HÔN**
-
-<@${message.author.id}> và <@${partner}>
-đã chia tay sau **${days} ngày** bên nhau...`
-)
-
-}
-
-/* ====== cặp đôi =====*/
-if(command === "couples"){
-
-let data = couples[message.author.id]
-
-if(!data)
-return message.reply("Bạn chưa có người yêu")
-
-let partner = data.partner
-
-let days = Math.floor((Date.now() - data.since) / (1000*60*60*24))
-
-message.channel.send(
-`❤️ **THÔNG TIN CẶP ĐÔI**
-
-👤 Bạn: <@${message.author.id}>
-💑 Người yêu: <@${partner}>
-
-📅 Đã yêu: **${days} ngày**`
-)
-
-}
-
-/* ====== top cuoi =====*/
-if(command === "topcouples"){
-
-let list = []
-
-for(let id in couples){
-
-let data = couples[id]
-
-if(id < data.partner){
-
-let days = Math.floor((Date.now() - data.since) / (1000*60*60*24))
-
-list.push({
-user1: id,
-user2: data.partner,
-days: days
-})
-
-}
-
-}
-
-list.sort((a,b)=>b.days-a.days)
-
-let text = "🏆 **TOP CẶP ĐÔI YÊU LÂU NHẤT**\n\n"
-
-list.slice(0,10).forEach((c,i)=>{
-text += `${i+1}. <@${c.user1}> ❤️ <@${c.user2}> — ${c.days} ngày\n`
-})
-
-if(list.length === 0)
-text = "Chưa có cặp đôi nào."
-
-message.channel.send(text)
-
-}
-
 /* ====== abc =====*/
   
   if (message.content.startsWith(PREFIX)) {
@@ -695,6 +553,148 @@ if (cmd === "ship") {
     .setTimestamp();
 
   return message.channel.send({ embeds: [embed] });
+}
+
+/* ===== kết hôn ==== */
+if(command === "kethon"){
+
+let user = message.mentions.users.first()
+
+if(!user)
+return message.reply("Hãy tag người bạn muốn kết hôn 💍")
+
+if(couples[message.author.id])
+return message.reply("Bạn đã kết hôn rồi!")
+
+if(user.id === message.author.id)
+return message.reply("Bạn không thể cưới chính mình 🤨")
+
+let now = Date.now()
+
+couples[message.author.id] = {
+partner: user.id,
+since: now,
+lastAnnounce: 0
+}
+
+couples[user.id] = {
+partner: message.author.id,
+since: now,
+lastAnnounce: 0
+}
+
+saveCouples()
+
+message.channel.send(
+`💒 **THÔNG BÁO LỄ KẾT HÔN**
+
+Hôm nay là một ngày đặc biệt tại **EternalServer Community** ✨
+
+💍 **${message.author.username}** và **${user.username}**
+đã chính thức nên duyên vợ chồng ❤️
+
+🎊 Lễ kết hôn được tổ chức tại **EternalServer Community**
+với sự góp mặt của toàn bộ member trong server.
+
+👏 Hãy cùng chúc phúc cho cặp đôi này!
+
+${message.author} ❤️ ${user}`
+)
+
+}
+
+/* ====== ly hôn ==== */
+if(command === "lyhon"){
+
+let data = couples[message.author.id]
+
+if(!data)
+return message.reply("Bạn chưa kết hôn")
+
+let partner = data.partner
+
+let days = Math.floor((Date.now() - data.since) / (1000*60*60*24))
+
+if(days < 7){
+return message.reply(
+`💔 Bạn mới kết hôn **${days} ngày**.
+Phải sau **7 ngày** mới được ly hôn.`
+)
+}
+
+delete couples[message.author.id]
+delete couples[partner]
+
+saveCouples()
+
+message.channel.send(
+`💔 **LY HÔN**
+
+<@${message.author.id}> và <@${partner}>
+đã chia tay sau **${days} ngày** bên nhau...`
+)
+
+}
+
+/* ====== cặp đôi =====*/
+if(command === "capdoi"){
+
+let data = couples[message.author.id]
+
+if(!data)
+return message.reply("Bạn chưa có người yêu")
+
+let partner = data.partner
+
+let days = Math.floor((Date.now() - data.since) / (1000*60*60*24))
+
+message.channel.send(
+`❤️ **THÔNG TIN CẶP ĐÔI**
+
+👤 Bạn: <@${message.author.id}>
+💑 Người yêu: <@${partner}>
+
+📅 Đã yêu: **${days} ngày**`
+)
+
+}
+
+/* ====== top cuoi =====*/
+if(command === "topcuoi"){
+
+let list = []
+
+for(let id in couples){
+
+let data = couples[id]
+
+if(id < data.partner){
+
+let days = Math.floor((Date.now() - data.since) / (1000*60*60*24))
+
+list.push({
+user1: id,
+user2: data.partner,
+days: days
+})
+
+}
+
+}
+
+list.sort((a,b)=>b.days-a.days)
+
+let text = "🏆 **TOP CẶP ĐÔI YÊU LÂU NHẤT**\n\n"
+
+list.slice(0,10).forEach((c,i)=>{
+text += `${i+1}. <@${c.user1}> ❤️ <@${c.user2}> — ${c.days} ngày\n`
+})
+
+if(list.length === 0)
+text = "Chưa có cặp đôi nào."
+
+message.channel.send(text)
+
 }
     
     /* ===== !rank ===== */
@@ -897,6 +897,11 @@ Bot : Không
           { name: '`code`', value: 'Xem danh sách code quà tặng', inline: true },
           { name: '📊 **LỆNH THÔNG TIN**', value: '────────────' },
           { name: '`/info` hoặc `info`', value: 'Thông tin về bot', inline: true },
+          { name: '`ship @user`', value: 'Để xem độ phụ hợp ghép đôi', inline: true },
+          { name: '`kethon @user`', value: 'Để kết hôn với ng mình muốn', inline: true },
+          { name: '`lyhon`', value: 'Để ly hôn', inline: true },
+          { name: '`capdoi', value: 'Để xem thông tin đã cưới', inline: true },
+          { name: '`topcuoi', value: 'Để xem thông tin các cặp đôi đã kết hôn', inline: true },
           { name: '`/ping` hoặc `ping`', value: 'Kiểm tra độ trễ của bot', inline: true },
           { name: '`getid [@user]`', value: 'Xem ID của người dùng', inline: true },
           { name: '`owner`', value: 'Xem thông tin chủ bot', inline: true },

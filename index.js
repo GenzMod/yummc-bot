@@ -1752,65 +1752,117 @@ client.on("interactionCreate", async interaction => {
     }
     
   /* ====== tatrot ===== */
-    if (interaction.commandName === "tarot") {
+if (interaction.commandName === "tarot") {
 
 const wish = interaction.options.getString("mongmuon")
 
 const shuffled = [...tarotDeck].sort(()=>0.5-Math.random())
-
 const cards = shuffled.slice(0,3)
 
-let chosen = []
+let chosenIndex = []
+let revealed = []
 
+function buildButtons(){
 const row = new ActionRowBuilder()
 
 for(let i=0;i<5;i++){
+
+let label = "🃏"
+let style = ButtonStyle.Secondary
+let disabled = false
+
+if(revealed.includes(i)){
+label = "✨"
+style = ButtonStyle.Success
+disabled = true
+}
+
 row.addComponents(
 new ButtonBuilder()
 .setCustomId("card_"+i)
-.setLabel("🃏")
-.setStyle(ButtonStyle.Secondary)
+.setLabel(label)
+.setStyle(style)
+.setDisabled(disabled)
 )
+
 }
 
-const msg = await interaction.reply({
-content:`🔮 **Tarot Reading**\n\nMong muốn: *${wish}*\n\nHãy chọn 3 lá bài`,
-components:[row],
-fetchReply:true
+return row
+}
+
+await interaction.reply({
+embeds:[
+new EmbedBuilder()
+.setTitle("🔮 Tarot Reading")
+.setDescription(
+`✨ Mong muốn: *${wish}*
+
+🃏 Hãy chọn **3 lá bài** để xem vận mệnh`
+)
+.setColor("Purple")
+],
+components:[buildButtons()]
 })
 
-const collector = msg.createMessageComponentCollector({time:60000})
+const msg = await interaction.fetchReply()
+
+const collector = msg.createMessageComponentCollector({
+time:60000
+})
 
 collector.on("collect", async i=>{
 
-if(i.user.id !== interaction.user.id)
-return i.reply({content:"Đây không phải lượt của bạn",ephemeral:true})
+if(i.user.id !== interaction.user.id){
+return i.reply({
+content:"❌ Đây không phải lượt của bạn",
+ephemeral:true
+})
+}
 
-chosen.push(i.customId)
+const index = Number(i.customId.split("_")[1])
+
+if(chosenIndex.includes(index)){
+return i.reply({
+content:"⚠️ Bạn đã chọn lá này rồi",
+ephemeral:true
+})
+}
+
+chosenIndex.push(index)
+revealed.push(index)
 
 await i.update({
-content:`🂠 **Đang lật bài...**`,
-components:[]
+embeds:[
+new EmbedBuilder()
+.setTitle("🔮 Tarot Reading")
+.setDescription(
+`✨ Mong muốn: *${wish}*
+
+🃏 Đang lật bài...`
+)
+.setColor("Purple")
+],
+components:[buildButtons()]
 })
 
 setTimeout(async()=>{
 
-const card = cards[chosen.length-1]
+const card = cards[chosenIndex.length-1]
 
 const embed = new EmbedBuilder()
 
-.setTitle(`🔮 Lá bài ${chosen.length}`)
+.setTitle(`🔮 Lá bài ${chosenIndex.length}`)
 
 .setDescription(`**${card.name}**`)
 
 .addFields(
 {
-name:"Ý nghĩa lá bài",
+name:"📜 Ý nghĩa",
 value:card.meaning
 },
 {
-name:"Liên quan đến mong muốn của bạn",
-value:`"${wish}" có thể chịu ảnh hưởng bởi: ${card.meaning}`
+name:"🔗 Liên quan đến mong muốn",
+value:`"${wish}" chịu ảnh hưởng bởi: ${card.meaning}`
 }
 )
 
@@ -1818,8 +1870,24 @@ value:`"${wish}" có thể chịu ảnh hưởng bởi: ${card.meaning}`
 
 await interaction.followUp({embeds:[embed]})
 
-if(chosen.length===3){
+if(chosenIndex.length === 3){
+
+const final = new EmbedBuilder()
+
+.setTitle("🌌 Tổng Kết Tarot")
+
+.setDescription(
+`✨ Mong muốn: *${wish}*
+
+Ba lá bài đã chỉ ra rằng vận mệnh của bạn đang chịu ảnh hưởng từ nhiều yếu tố khác nhau. Hãy suy nghĩ kỹ về những thông điệp mà các lá bài mang lại.`
+)
+
+.setColor("Gold")
+
+await interaction.followUp({embeds:[final]})
+
 collector.stop()
+
 }
 
 },2000)

@@ -367,7 +367,7 @@ const ignore = [
 "gui"
 ];
 
-if (ignore.some(word => msg.includes(word))) return;
+if (!ignore.some(word => msg.includes(word))) {
 
 // random câu trả lời
 const replies = [

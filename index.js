@@ -1762,12 +1762,16 @@ const cards = shuffled.slice(0,3)
 let chosenIndex = []
 let revealed = []
 
+// khóa khi đang lật bài
+let choosing = false
+
 function buildButtons(){
+
 const row = new ActionRowBuilder()
 
 for(let i=0;i<5;i++){
 
-let label = "🃏"
+let label = "🂠"
 let style = ButtonStyle.Secondary
 let disabled = false
 
@@ -1788,6 +1792,7 @@ new ButtonBuilder()
 }
 
 return row
+
 }
 
 await interaction.reply({
@@ -1819,6 +1824,8 @@ ephemeral:true
 })
 }
 
+if(choosing) return
+
 const index = Number(i.customId.split("_")[1])
 
 if(chosenIndex.includes(index)){
@@ -1827,6 +1834,8 @@ content:"⚠️ Bạn đã chọn lá này rồi",
 ephemeral:true
 })
 }
+
+choosing = true
 
 chosenIndex.push(index)
 revealed.push(index)
@@ -1842,7 +1851,7 @@ new EmbedBuilder()
 )
 .setColor("Purple")
 ],
-components:[buildButtons()]
+components:[]
 })
 
 setTimeout(async()=>{
@@ -1869,6 +1878,12 @@ value:`"${wish}" chịu ảnh hưởng bởi: ${card.meaning}`
 .setColor("Purple")
 
 await interaction.followUp({embeds:[embed]})
+
+choosing = false
+
+await interaction.editReply({
+components:[buildButtons()]
+})
 
 if(chosenIndex.length === 3){
 

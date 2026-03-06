@@ -19,20 +19,21 @@ const {
 } = require("discord.js");
 /* ======== kết hôn ===== */
 
-const fs = require("fs")
-const path = require("path")
+const mongoose = require("mongoose")
 
-const couplesPath = path.join(__dirname, "couples.json")
+mongoose.connect(process.env.MONGO_URI)
 
-let couples = {}
+.then(()=>console.log("MongoDB connected"))
+.catch(err=>console.log(err))
 
-if (fs.existsSync(couplesPath)) {
-  couples = JSON.parse(fs.readFileSync(couplesPath, "utf8"))
-}
+const coupleSchema = new mongoose.Schema({
+user1: String,
+user2: String,
+since: Number,
+lastAnnounce: Number
+})
 
-function saveCouples(){
-  fs.writeFileSync(couplesPath, JSON.stringify(couples, null, 2))
-}
+const Couple = mongoose.model("Couple", coupleSchema)
 /* ======= adn */
 
 const { status } = require("minecraft-server-util");
@@ -566,27 +567,29 @@ let user = message.mentions.users.first()
 if(!user)
 return message.reply("Hãy tag người bạn muốn kết hôn 💍")
 
-if(couples[message.author.id])
-return message.reply("Bạn đã kết hôn rồi!")
-
 if(user.id === message.author.id)
 return message.reply("Bạn không thể cưới chính mình 🤨")
 
+let exists = await Couple.findOne({
+$or:[
+{user1: message.author.id},
+{user2: message.author.id}
+]
+})
+
+if(exists)
+return message.reply("Bạn đã kết hôn rồi!")
+
 let now = Date.now()
 
-couples[message.author.id] = {
-partner: user.id,
+let couple = new Couple({
+user1: message.author.id,
+user2: user.id,
 since: now,
 lastAnnounce: 0
-}
+})
 
-couples[user.id] = {
-partner: message.author.id,
-since: now,
-lastAnnounce: 0
-}
-
-saveCouples()
+await couple.save()
 
 message.channel.send(
 `💒 **THÔNG BÁO LỄ KẾT HÔN**
@@ -609,14 +612,22 @@ ${message.author} ❤️ ${user}`
 /* ====== ly hôn ==== */
 if(cmd === "lyhon"){
 
-let data = couples[message.author.id]
+let data = await Couple.findOne({
+$or:[
+{user1: message.author.id},
+{user2: message.author.id}
+]
+})
 
 if(!data)
 return message.reply("Bạn chưa kết hôn")
 
-let partner = data.partner
+let partner =
+data.user1 === message.author.id
+? data.user2
+: data.user1
 
-let days = Math.floor((Date.now() - data.since) / (1000*60*60*24))
+let days = Math.floor((Date.now() - data.since)/(1000*60*60*24))
 
 if(days < 7){
 return message.reply(
@@ -625,10 +636,7 @@ Phải sau **7 ngày** mới được ly hôn.`
 )
 }
 
-delete couples[message.author.id]
-delete couples[partner]
-
-saveCouples()
+await Couple.deleteOne({_id:data._id})
 
 message.channel.send(
 `💔 **LY HÔN**
@@ -642,14 +650,22 @@ message.channel.send(
 /* ====== cặp đôi =====*/
 if(cmd === "capdoi"){
 
-let data = couples[message.author.id]
+let data = await Couple.findOne({
+$or:[
+{user1: message.author.id},
+{user2: message.author.id}
+]
+})
 
 if(!data)
 return message.reply("Bạn chưa có người yêu")
 
-let partner = data.partner
+let partner =
+data.user1 === message.author.id
+? data.user2
+: data.user1
 
-let days = Math.floor((Date.now() - data.since) / (1000*60*60*24))
+let days = Math.floor((Date.now() - data.since)/(1000*60*60*24))
 
 message.channel.send(
 `❤️ **THÔNG TIN CẶP ĐÔI**
@@ -665,25 +681,22 @@ message.channel.send(
 /* ====== top cuoi =====*/
 if(cmd === "topcuoi"){
 
-let list = []
+let couples = await Couple.find()
 
-for(let id in couples){
+if(couples.length === 0)
+return message.channel.send("Chưa có cặp đôi nào.")
 
-let data = couples[id]
+let list = couples.map(c=>{
 
-if(id < data.partner){
+let days = Math.floor((Date.now()-c.since)/(1000*60*60*24))
 
-let days = Math.floor((Date.now() - data.since) / (1000*60*60*24))
-
-list.push({
-user1: id,
-user2: data.partner,
+return {
+user1: c.user1,
+user2: c.user2,
 days: days
+}
+
 })
-
-}
-
-}
 
 list.sort((a,b)=>b.days-a.days)
 
@@ -692,9 +705,6 @@ let text = "🏆 **TOP CẶP ĐÔI YÊU LÂU NHẤT**\n\n"
 list.slice(0,10).forEach((c,i)=>{
 text += `${i+1}. <@${c.user1}> ❤️ <@${c.user2}> — ${c.days} ngày\n`
 })
-
-if(list.length === 0)
-text = "Chưa có cặp đôi nào."
 
 message.channel.send(text)
 

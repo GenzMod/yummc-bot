@@ -671,7 +671,7 @@ description:`
 
 📂 Đã tải về 69GB dữ liệu
 
-😈 Đùa thôi! Đây là troll.
+😈 Đã đánh cắp tất cả dữ liệu.
 `
 }]
 })

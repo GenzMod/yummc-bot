@@ -17,7 +17,7 @@ const {
   Partials,
   PermissionsBitField
 } = require("discord.js");
-/* ======= kết hôn ===== */
+/* ======== kết hôn ===== */
 
 const fs = require("fs")
 

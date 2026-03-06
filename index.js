@@ -24,7 +24,7 @@ const {
 const { status } = require("minecraft-server-util");
 
 
-/* ================ CLIENT ================= */
+/* =============== CLIENT ================= */
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,

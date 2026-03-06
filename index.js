@@ -577,32 +577,32 @@ let now = Date.now()
 
 couples[message.author.id] = {
 partner: user.id,
-since: now
+since: now,
+lastAnnounce: 0
 }
 
 couples[user.id] = {
 partner: message.author.id,
-since: now
+since: now,
+lastAnnounce: 0
 }
 
 saveCouples()
 
 message.channel.send(
-
 `💒 **THÔNG BÁO LỄ KẾT HÔN**
 
 Hôm nay là một ngày đặc biệt tại **EternalServer Community** ✨
 
-💍 **${message.author.username}** và **${user.username}**  
+💍 **${message.author.username}** và **${user.username}**
 đã chính thức nên duyên vợ chồng ❤️
 
-🎊 Lễ kết hôn được tổ chức tại **EternalServer Community**  
-Với sự góp mặt của toàn thể member trong server.
+🎊 Lễ kết hôn được tổ chức tại **EternalServer Community**
+với sự góp mặt của toàn bộ member trong server.
 
-👏 Mọi người hãy cùng chúc phúc cho cặp đôi này!
+👏 Hãy cùng chúc phúc cho cặp đôi này!
 
 ${message.author} ❤️ ${user}`
-
 )
 
 }

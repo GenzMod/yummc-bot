@@ -355,6 +355,18 @@ const commands = [
     description: "Thông tin về bot"
   },
   {
+    name: "votedeptrai",
+    description: "Vote độ đẹp trai của một người",
+    options:[
+  {
+    name:"user",
+    description:"Người cần vote",
+    type:6,
+    required:true
+  }
+  ]
+  },
+  {
     name: "tarot",
     description: "Bói tarot",
     options: [
@@ -1750,6 +1762,136 @@ client.on("interactionCreate", async interaction => {
 
       await interaction.reply({ embeds: [embed] });
     }
+    
+    
+    /* ===== vote ====== */
+if (interaction.commandName === "votedeptrai") {
+
+const user = interaction.options.getUser("user")
+
+let handsome = 0
+let ugly = 0
+const voters = new Set()
+
+function buildBar(){
+
+const total = handsome + ugly
+
+let percent = total === 0 ? 50 : Math.round((handsome / total) * 100)
+
+let bar = "🟩".repeat(Math.floor(percent/10)) +
+"⬜".repeat(10-Math.floor(percent/10))
+
+return `Độ đẹp trai: ${percent}%\n${bar}`
+
+}
+
+function buildEmbed(){
+
+return new EmbedBuilder()
+
+.setTitle("🗳️ Vote Độ Đẹp Trai")
+
+.setDescription(`Mọi người hãy đánh giá độ đẹp trai của ${user}`)
+
+.addFields(
+{name:"👍 Đẹp trai",value:String(handsome),inline:true},
+{name:"👎 Xấu trai",value:String(ugly),inline:true},
+{name:"📊 Tỉ lệ",value:buildBar()}
+)
+
+.setThumbnail(user.displayAvatarURL())
+
+.setColor("Blue")
+
+}
+
+const row = new ActionRowBuilder().addComponents(
+
+new ButtonBuilder()
+.setCustomId("vote_handsome")
+.setLabel("👍 Đẹp trai")
+.setStyle(ButtonStyle.Success),
+
+new ButtonBuilder()
+.setCustomId("vote_ugly")
+.setLabel("👎 Xấu trai")
+.setStyle(ButtonStyle.Danger)
+
+)
+
+await interaction.reply({
+embeds:[buildEmbed()],
+components:[row]
+})
+
+const msg = await interaction.fetchReply()
+
+const collector = msg.createMessageComponentCollector({
+time:600000
+})
+
+collector.on("collect", async i=>{
+
+if(voters.has(i.user.id)){
+
+return i.reply({
+content:"❌ Bạn đã vote rồi!",
+ephemeral:true
+})
+
+}
+
+voters.add(i.user.id)
+
+await i.update({
+embeds:[
+new EmbedBuilder()
+.setTitle("📊 Đang cập nhật vote...")
+.setDescription("⏳ Đợi chút...")
+.setColor("Yellow")
+],
+components:[]
+})
+
+setTimeout(async()=>{
+
+if(i.customId === "vote_handsome") handsome++
+if(i.customId === "vote_ugly") ugly++
+
+await interaction.editReply({
+embeds:[buildEmbed()],
+components:[row]
+})
+
+},1500)
+
+})
+
+collector.on("end", async()=>{
+
+const final = new EmbedBuilder()
+
+.setTitle("🏆 Kết quả vote")
+
+.setDescription(`${user} đã được server đánh giá`)
+
+.addFields(
+{name:"👍 Đẹp trai",value:String(handsome),inline:true},
+{name:"👎 Xấu trai",value:String(ugly),inline:true},
+{name:"📊 Kết quả",value:buildBar()}
+)
+
+.setColor("Gold")
+
+await interaction.followUp({
+embeds:[final]
+})
+
+})
+
+}
+  
     
   /* ====== tatrot ===== */
 if (interaction.commandName === "tarot") {

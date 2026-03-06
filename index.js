@@ -43,6 +43,262 @@ let lastStatus = null;
 const messageCount = new Map();
 
 // 🤖 KIẾN THỨC AI NPC SERVER //
+const tarotDeck = [
+{
+name:"The Fool",
+meaning:"Khởi đầu mới, hành trình mới. Lá bài này cho thấy bạn đang đứng trước một bước ngoặt lớn. Đôi khi cần liều lĩnh để đạt được điều mình mong muốn."
+},
+
+{
+name:"The Magician",
+meaning:"Sức mạnh và khả năng biến ý tưởng thành hiện thực. Nếu bạn tin vào bản thân, bạn có thể đạt được điều mình mong muốn."
+},
+
+{
+name:"The High Priestess",
+meaning:"Trực giác và bí mật. Có thể câu trả lời bạn tìm kiếm đã nằm sẵn trong tâm trí bạn."
+},
+
+{
+name:"The Empress",
+meaning:"Sự sinh sôi, tình yêu và phát triển. Điều bạn mong muốn có thể sẽ phát triển theo hướng tích cực."
+},
+
+{
+name:"The Emperor",
+meaning:"Quyền lực và kiểm soát. Bạn cần kiểm soát tình hình thay vì để nó kiểm soát bạn."
+},
+
+{
+name:"The Hierophant",
+meaning:"Truyền thống và lời khuyên từ người có kinh nghiệm. Hãy lắng nghe những người đi trước."
+},
+
+{
+name:"The Lovers",
+meaning:"Tình yêu và sự lựa chọn quan trọng. Lá bài này thường liên quan đến các quyết định cảm xúc."
+},
+
+{
+name:"The Chariot",
+meaning:"Chiến thắng nhờ ý chí mạnh mẽ. Nếu bạn kiên trì, bạn sẽ đạt được điều mong muốn."
+},
+
+{
+name:"Strength",
+meaning:"Sức mạnh nội tâm. Sự kiên nhẫn và lòng can đảm sẽ giúp bạn vượt qua thử thách."
+},
+
+{
+name:"The Hermit",
+meaning:"Thời gian suy ngẫm. Có thể bạn cần ở một mình để hiểu rõ bản thân."
+},
+
+{
+name:"Wheel of Fortune",
+meaning:"Vận mệnh thay đổi. Những điều bất ngờ có thể xảy ra."
+},
+
+{
+name:"Justice",
+meaning:"Sự công bằng và cân bằng. Quyết định đúng đắn sẽ dẫn bạn đến kết quả tốt."
+},
+
+{
+name:"The Hanged Man",
+meaning:"Hy sinh và góc nhìn mới. Đôi khi phải chấp nhận chậm lại để hiểu rõ hơn."
+},
+
+{
+name:"Death",
+meaning:"Kết thúc để bắt đầu mới. Một giai đoạn cũ đang kết thúc."
+},
+
+{
+name:"Temperance",
+meaning:"Sự cân bằng và hòa hợp. Hãy kiên nhẫn với quá trình."
+},
+
+{
+name:"The Devil",
+meaning:"Sự ràng buộc hoặc cám dỗ. Có điều gì đó đang giữ bạn lại."
+},
+
+{
+name:"The Tower",
+meaning:"Biến cố bất ngờ. Một sự thật lớn có thể sắp được hé lộ."
+},
+
+{
+name:"The Star",
+meaning:"Hy vọng và chữa lành. Đây là dấu hiệu tích cực."
+},
+
+{
+name:"The Moon",
+meaning:"Sự mơ hồ và nghi ngờ. Có thể bạn chưa thấy toàn bộ sự thật."
+},
+
+{
+name:"The Sun",
+meaning:"Niềm vui, thành công và năng lượng tích cực."
+},
+
+{
+name:"Judgement",
+meaning:"Thức tỉnh và nhận ra con đường thật sự của mình."
+},
+
+{
+name:"The World",
+meaning:"Hoàn thành và đạt được mục tiêu."
+},
+
+/* ===== MINOR ARCANA ===== */
+
+{
+name:"Ace of Cups",
+meaning:"Khởi đầu của tình yêu hoặc cảm xúc mới."
+},
+
+{
+name:"Two of Cups",
+meaning:"Sự kết nối mạnh mẽ giữa hai người."
+},
+
+{
+name:"Three of Cups",
+meaning:"Niềm vui, tình bạn và sự ăn mừng."
+},
+
+{
+name:"Four of Cups",
+meaning:"Sự chán nản hoặc bỏ lỡ cơ hội."
+},
+
+{
+name:"Five of Cups",
+meaning:"Thất vọng nhưng vẫn còn hy vọng."
+},
+
+{
+name:"Six of Cups",
+meaning:"Kỷ niệm và quá khứ quay trở lại."
+},
+
+{
+name:"Seven of Cups",
+meaning:"Nhiều lựa chọn khiến bạn bối rối."
+},
+
+{
+name:"Eight of Cups",
+meaning:"Rời bỏ điều không còn phù hợp."
+},
+
+{
+name:"Nine of Cups",
+meaning:"Điều ước có thể trở thành sự thật."
+},
+
+{
+name:"Ten of Cups",
+meaning:"Hạnh phúc và sự viên mãn."
+},
+
+{
+name:"Page of Cups",
+meaning:"Tin nhắn hoặc cảm xúc mới."
+},
+
+{
+name:"Knight of Cups",
+meaning:"Sự lãng mạn và hành động theo cảm xúc."
+},
+
+{
+name:"Queen of Cups",
+meaning:"Trực giác mạnh và lòng trắc ẩn."
+},
+
+{
+name:"King of Cups",
+meaning:"Kiểm soát cảm xúc và sự trưởng thành."
+},
+
+/* SWORDS */
+
+{
+name:"Ace of Swords",
+meaning:"Sự thật và ý tưởng mới."
+},
+
+{
+name:"Two of Swords",
+meaning:"Sự do dự giữa hai lựa chọn."
+},
+
+{
+name:"Three of Swords",
+meaning:"Nỗi đau hoặc thất tình."
+},
+
+{
+name:"Four of Swords",
+meaning:"Nghỉ ngơi và hồi phục."
+},
+
+{
+name:"Five of Swords",
+meaning:"Xung đột hoặc chiến thắng không trọn vẹn."
+},
+
+{
+name:"Six of Swords",
+meaning:"Rời khỏi khó khăn."
+},
+
+{
+name:"Seven of Swords",
+meaning:"Sự lừa dối hoặc bí mật."
+},
+
+{
+name:"Eight of Swords",
+meaning:"Cảm giác bị mắc kẹt."
+},
+
+{
+name:"Nine of Swords",
+meaning:"Lo lắng và suy nghĩ tiêu cực."
+},
+
+{
+name:"Ten of Swords",
+meaning:"Kết thúc đau đớn nhưng cần thiết."
+},
+
+{
+name:"Page of Swords",
+meaning:"Sự tò mò và học hỏi."
+},
+
+{
+name:"Knight of Swords",
+meaning:"Hành động nhanh và quyết đoán."
+},
+
+{
+name:"Queen of Swords",
+meaning:"Sự thông minh và độc lập."
+},
+
+{
+name:"King of Swords",
+meaning:"Lý trí và quyền lực trí tuệ."
+}
+
+]
 
 
 // 🔐 Cấu hình role permissions
@@ -97,6 +353,18 @@ const commands = [
   {
     name: "info",
     description: "Thông tin về bot"
+  },
+  {
+    name: "tarot",
+    description: "Bói tarot",
+    options: [
+      {
+        name: "mongmuon",
+        description: "Điều bạn muốn biết",
+        type: 3,
+        required: true
+      }
+    ]
   }
 ];
 
@@ -1482,6 +1750,84 @@ client.on("interactionCreate", async interaction => {
 
       await interaction.reply({ embeds: [embed] });
     }
+    
+  /* ====== tatrot ===== */
+    if (interaction.commandName === "tarot") {
+
+const wish = interaction.options.getString("mongmuon")
+
+const shuffled = [...tarotDeck].sort(()=>0.5-Math.random())
+
+const cards = shuffled.slice(0,3)
+
+let chosen = []
+
+const row = new ActionRowBuilder()
+
+for(let i=0;i<5;i++){
+row.addComponents(
+new ButtonBuilder()
+.setCustomId("card_"+i)
+.setLabel("🃏")
+.setStyle(ButtonStyle.Secondary)
+)
+}
+
+const msg = await interaction.reply({
+content:`🔮 **Tarot Reading**\n\nMong muốn: *${wish}*\n\nHãy chọn 3 lá bài`,
+components:[row],
+fetchReply:true
+})
+
+const collector = msg.createMessageComponentCollector({time:60000})
+
+collector.on("collect", async i=>{
+
+if(i.user.id !== interaction.user.id)
+return i.reply({content:"Đây không phải lượt của bạn",ephemeral:true})
+
+chosen.push(i.customId)
+
+await i.update({
+content:`🂠 **Đang lật bài...**`,
+components:[]
+})
+
+setTimeout(async()=>{
+
+const card = cards[chosen.length-1]
+
+const embed = new EmbedBuilder()
+
+.setTitle(`🔮 Lá bài ${chosen.length}`)
+
+.setDescription(`**${card.name}**`)
+
+.addFields(
+{
+name:"Ý nghĩa lá bài",
+value:card.meaning
+},
+{
+name:"Liên quan đến mong muốn của bạn",
+value:`"${wish}" có thể chịu ảnh hưởng bởi: ${card.meaning}`
+}
+)
+
+.setColor("Purple")
+
+await interaction.followUp({embeds:[embed]})
+
+if(chosen.length===3){
+collector.stop()
+}
+
+},2000)
+
+})
+
+}
+    
 
     /* ===== /gui - KIỂM TRA ROLE ===== */
     if (interaction.commandName === "gui") {

@@ -2207,10 +2207,6 @@ collector.stop()
     }
   }
   
-  if (interaction.isModalSubmit()) {
-    await handleModalSubmit(interaction);
-  }
-});
 
 /* ================= LỖI ================= */
 client.on('error', error => {

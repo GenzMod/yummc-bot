@@ -20,15 +20,18 @@ const {
 /* ======== kết hôn ===== */
 
 const fs = require("fs")
+const path = require("path")
+
+const couplesPath = path.join(__dirname, "couples.json")
 
 let couples = {}
 
-if (fs.existsSync("./couples.json")) {
-  couples = JSON.parse(fs.readFileSync("./couples.json", "utf8"))
+if (fs.existsSync(couplesPath)) {
+  couples = JSON.parse(fs.readFileSync(couplesPath, "utf8"))
 }
 
 function saveCouples(){
-  fs.writeFileSync("./couples.json", JSON.stringify(couples, null, 2))
+  fs.writeFileSync(couplesPath, JSON.stringify(couples, null, 2))
 }
 /* ======= adn */
 

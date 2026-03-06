@@ -567,44 +567,42 @@ let user = message.mentions.users.first()
 if(!user)
 return message.reply("Hãy tag người bạn muốn kết hôn 💍")
 
+if(couples[message.author.id])
+return message.reply("Bạn đã kết hôn rồi!")
+
 if(user.id === message.author.id)
 return message.reply("Bạn không thể cưới chính mình 🤨")
 
-let exists = await Couple.findOne({
-$or:[
-{user1: message.author.id},
-{user2: message.author.id}
-]
-})
-
-if(exists)
-return message.reply("Bạn đã kết hôn rồi!")
-
 let now = Date.now()
 
-let couple = new Couple({
-user1: message.author.id,
-user2: user.id,
-since: now,
-lastAnnounce: 0
-})
+couples[message.author.id] = {
+partner: user.id,
+since: now
+}
 
-await couple.save()
+couples[user.id] = {
+partner: message.author.id,
+since: now
+}
+
+saveCouples()
 
 message.channel.send(
+
 `💒 **THÔNG BÁO LỄ KẾT HÔN**
 
 Hôm nay là một ngày đặc biệt tại **EternalServer Community** ✨
 
-💍 **${message.author.username}** và **${user.username}**
+💍 **${message.author.username}** và **${user.username}**  
 đã chính thức nên duyên vợ chồng ❤️
 
-🎊 Lễ kết hôn được tổ chức tại **EternalServer Community**
-với sự góp mặt của toàn bộ member trong server.
+🎊 Lễ kết hôn được tổ chức tại **EternalServer Community**  
+Với sự góp mặt của toàn thể member trong server.
 
-👏 Hãy cùng chúc phúc cho cặp đôi này!
+👏 Mọi người hãy cùng chúc phúc cho cặp đôi này!
 
 ${message.author} ❤️ ${user}`
+
 )
 
 }

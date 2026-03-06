@@ -1772,7 +1772,7 @@ client.on("interactionCreate", async interaction => {
 
 if (interaction.commandName === "vote") {
 
-if (!interaction.member.roles.cache.has(process.env.ADMIN_ROLE_ID)) {
+if (!interaction.member.roles.cache.has(process.env.ALLOWED_ROLE_ID)) {
 return interaction.reply({
 content: "❌ Chỉ Admin mới được tạo vote!",
 ephemeral: true

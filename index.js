@@ -1698,8 +1698,8 @@ Bot : Không
 
 /* ================= SLASH COMMAND ================= */
 client.on("interactionCreate", async interaction => {
-  if (interaction.isModalSubmit()) {
-/* ====== vote1 ===== */
+  
+  /* ====== vote1 ===== */
 if (interaction.customId === "vote_create") {
 
 const title = interaction.fields.getTextInputValue("vote_title")
@@ -1861,8 +1861,7 @@ components:[disabledRow]
 
 }
 
-}
-
+  if (interaction.isModalSubmit()) {
 
   if (interaction.isChatInputCommand()) {
     

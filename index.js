@@ -720,40 +720,130 @@ client.on("messageCreate", async message => {
 
       return message.channel.send({ embeds: [embed] });
     }
+
+
     
+if(cmd === "kethon"){
 
-/* ====== !money ==== */
-/* ===== !kethon ===== */
-if (cmd === "kethon") {
+const user = message.mentions.users.first()
 
-const user = message.mentions.users.first();
+if(!user) return message.reply("❌ Hãy tag người bạn muốn kết hôn")
 
-if (!user) {
-return message.reply("❌ Bạn phải tag người muốn kết hôn");
-}
+if(user.id === message.author.id)
+return message.reply("❌ Không thể cưới chính mình")
 
-if (user.id === message.author.id) {
-return message.reply("❌ Không thể tự cưới mình");
-}
-
-const married = db.getMarriage(message.author.id);
-
-if (married) {
-return message.reply("❌ Bạn đã kết hôn rồi");
-}
-
-db.marry(message.author.id, user.id);
+if(db.getMarriage(message.author.id))
+return message.reply("❌ Bạn đã có gia đình rồi")
 
 const embed = new EmbedBuilder()
-.setColor("#ff6699")
-.setTitle("💍 KẾT HÔN THÀNH CÔNG")
-.setDescription(`💑 ${message.author} đã kết hôn với ${user}`)
-.setTimestamp();
 
-message.channel.send({ embeds: [embed] });
+.setColor("#ff66cc")
+
+.setTitle("💒 THIỆP MỜI ĐÁM CƯỚI 💒")
+
+.setDescription(`
+📢 **THÔNG BÁO TRỌNG ĐẠI**
+
+Một lễ cưới hoành tráng đang được tổ chức ngay tại **${message.guild.name}**!
+
+💍 **${message.author.username}** và **${user.username}**
+
+sẽ chính thức nên duyên vợ chồng trước sự chứng kiến của toàn thể anh em trong server.
+
+👰🤵 Xin mời tất cả các thành viên đến chung vui và chúc phúc cho cặp đôi!
+
+━━━━━━━━━━━━━━
+
+❤️ **Chú rể:** ${message.author}
+
+💖 **Cô dâu:** ${user}
+
+🎉 **Khách mời:** Toàn thể thành viên trong server
+
+━━━━━━━━━━━━━━
+
+💐 Chúc cho hai bạn
+
+> **Trăm năm hạnh phúc  
+> Bạc đầu không xa rời**
+`)
+
+.setThumbnail(message.author.displayAvatarURL({dynamic:true}))
+
+.setImage("https://media.tenor.com/m1H9K0q1W3YAAAAC/anime-wedding.gif")
+
+.setFooter({text:"Wedding Ceremony • YumMC Server"})
+.setTimestamp()
+
+const yes = new ButtonBuilder()
+.setCustomId("yes_marriage")
+.setLabel("💖 Đồng ý")
+.setStyle(ButtonStyle.Success)
+
+const no = new ButtonBuilder()
+.setCustomId("no_marriage")
+.setLabel("💔 Từ chối")
+.setStyle(ButtonStyle.Danger)
+
+const row = new ActionRowBuilder().addComponents(yes,no)
+
+const msg = await message.channel.send({
+content:`💌 ${user}`,
+embeds:[embed],
+components:[row]
+})
+
+const filter = i => i.user.id === user.id
+
+const collector = msg.createMessageComponentCollector({filter,time:30000})
+
+collector.on("collect",async i=>{
+
+if(i.customId === "yes_marriage"){
+
+db.marry(message.author.id,user.id)
+
+const success = new EmbedBuilder()
+
+.setColor("#ff99cc")
+
+.setTitle("🎊 LỄ CƯỚI HOÀN TẤT 🎊")
+
+.setDescription(`
+💒 Hôn lễ đã chính thức hoàn thành!
+
+👰 **${message.author.username}**
+🤵 **${user.username}**
+
+đã trở thành **vợ chồng hợp pháp trong server**.
+
+🎉 Cả server hãy cùng chúc phúc cho cặp đôi này!
+
+━━━━━━━━━━━━━━
+
+💞 Tình yêu bắt đầu từ hôm nay
+`)
+
+.setImage("https://media.tenor.com/YVnQW4hJ4fEAAAAC/anime-wedding-love.gif")
+.setTimestamp()
+
+i.update({embeds:[success],components:[]})
 
 }
 
+if(i.customId === "no_marriage"){
+
+i.update({
+content:"💔 Lời cầu hôn đã bị từ chối...",
+embeds:[],
+components:[]
+})
+
+}
+
+})
+
+}
     /* ===== !vochong ===== */
 if (cmd === "vochong") {
 
@@ -2288,6 +2378,7 @@ client.login(process.env.TOKEN).catch(error => {
   process.exit(1);
 
 });
+
 
 
 

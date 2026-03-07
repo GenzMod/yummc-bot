@@ -15,30 +15,42 @@ function save(data) {
 
 module.exports = {
 
-  getMarriage(userId) {
-    const data = load();
-    return data.marriages[userId];
-  },
+getMarriage(userId){
+const data = load();
+return data.marriages[userId];
+},
 
-  marry(user1, user2) {
-    const data = load();
+marry(user1,user2){
+const data = load();
 
-    data.marriages[user1] = user2;
-    data.marriages[user2] = user1;
+data.marriages[user1] = {
+partner:user2,
+time:Date.now()
+}
 
-    save(data);
-  },
+data.marriages[user2] = {
+partner:user1,
+time:Date.now()
+}
 
-  divorce(userId) {
-    const data = load();
-    const partner = data.marriages[userId];
+save(data)
+},
 
-    if (partner) {
-      delete data.marriages[userId];
-      delete data.marriages[partner];
-    }
+divorce(user){
+const data = load();
 
-    save(data);
-  }
+const partner = data.marriages[user]?.partner
 
-};
+if(partner){
+delete data.marriages[user]
+delete data.marriages[partner]
+}
+
+save(data)
+},
+
+getAll(){
+return load().marriages
+}
+
+}

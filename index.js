@@ -321,7 +321,6 @@ function hasGuiPermission(member) {
   }
   
   // Kiểm tra role
-  if (ALLOWED_ROLE_IDS.length > 0) {
     return ALLOWED_ROLE_IDS.some(roleId => member.roles.cache.has(roleId));
   }
   
@@ -2378,6 +2377,7 @@ client.login(process.env.TOKEN).catch(error => {
   process.exit(1);
 
 });
+
 
 
 

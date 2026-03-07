@@ -46,7 +46,7 @@ const messageCount = new Map();
 // 🤖 KIẾN THỨC AI NPC SERVER //
 const tarotDeck = [
 {
-name:"The Fool",
+name:"The Fool"
 meaning:"Khởi đầu mới, hành trình mới. Lá bài này cho thấy bạn đang đứng trước một bước ngoặt lớn. Đôi khi cần liều lĩnh để đạt được điều mình mong muốn."
 },
 
@@ -2378,6 +2378,7 @@ client.login(process.env.TOKEN).catch(error => {
   process.exit(1);
 
 });
+
 
 
 

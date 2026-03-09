@@ -684,7 +684,7 @@ client.on("messageCreate", async message => {
 
     const randomReply = replies[Math.floor(Math.random() * replies.length)];
      // random 40% để bot đỡ spam
-    if (Math.random() < 0.4) {
+    if (Math.random() < 0.2) {
         message.reply(randomReply);
     }
 }

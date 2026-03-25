@@ -1691,7 +1691,7 @@ Bot : Không
           },
           {
             name: '🔌 Port',
-            value: '```Pe Mặc định (19132)/nPc mặc định(25565)```',
+            value: '```Pe Mặc định (19132)\nPc mặc định(25565)```',
             inline: true
           },
           {

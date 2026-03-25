@@ -1630,7 +1630,7 @@ Bot : Không
       
       const ipEmbed = new EmbedBuilder()
         .setColor('#00FF99')
-        .setTitle('🍀 **EternalSMP Community** 🍀')
+        .setTitle('🍀 **J2Mc Network** 🍀')
         .setDescription('🌐 Thông tin kết nối máy chủ')
         .addFields(
           {
@@ -1639,9 +1639,9 @@ Bot : Không
             inline: false
           },
           {
-            name: '🟢 🌴 Thuần Sinh Tồn ',
-            value: '```✅ Host lỏ, mở mấy ní chơi tạm```',
-            value: '```✅ server k luật, thích làm j làm 🐧```',
+            name: '🟢 ⚔️Spvp ',
+            value: '```✅ Nơi những trận chiến xảy ra```',
+            value: '```✅ Liệu bạn có thể sống sót 🐧```',
             inline: true
           },
           {
@@ -1655,8 +1655,8 @@ Bot : Không
             inline: true
           },
           {
-            name: '🟢 ☁️ SkyBlock',
-            value: '```✅ Đã mở! Thử nhiệm!\n🌎ip: sky.yummc.online\n🔌port : 25565```',
+            name: '🔴 ☁️ SkyBlock',
+            value: '```❎ Chưa mở!```',
             inline: true
           },
           {
@@ -1666,7 +1666,7 @@ Bot : Không
           },
           {
             name: '🌎 IP',
-            value: '```yummc.online```',
+            value: '```j2.yummc.online```',
             inline: true
           },
           {
@@ -1681,7 +1681,7 @@ Bot : Không
           },
           {
             name: '🌎 IP',
-            value: '```yummc.online```',
+            value: '```j2.yummc.online```',
             inline: true
           },
           {
@@ -1691,7 +1691,7 @@ Bot : Không
           },
           {
             name: '🔌 Port',
-            value: '```31213```',
+            value: '```Pe Mặc định (19132)/nPc mặc định(25565)```',
             inline: true
           },
           {
@@ -1717,7 +1717,7 @@ Bot : Không
         )
         .setImage('https://cdn.discordapp.com/attachments/1453047727117172927/1468059669896626207/87C09904-456F-47EA-A678-2517457545F8.png?ex=6982a49c&is=6981531c&hm=cb81830c1986dc5a6ab186607e3069c37d85db720692d94b110306ad22d8e1e4&') // Thêm banner nếu có
         .setFooter({ 
-          text: '🎮 EternalSMP - Kết nối cộng đồng Minecraft Việt Nam',
+          text: '🎮 J2Mc Smp - Kết nối cộng đồng Minecraft Việt Nam',
           iconURL: 'https://cdn.discordapp.com/attachments/1453047727117172927/1468059669896626207/87C09904-456F-47EA-A678-2517457545F8.png?ex=6982a49c&is=6981531c&hm=cb81830c1986dc5a6ab186607e3069c37d85db720692d94b110306ad22d8e1e4&'
         })
         .setTimestamp();
